@@ -284,42 +284,50 @@ namespace DockSample
 
         #region Event Handlers
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemExit_Click(object sender, System.EventArgs e)
         {
             Close();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemSolutionExplorer_Click(object sender, System.EventArgs e)
         {
             m_solutionExplorer.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemPropertyWindow_Click(object sender, System.EventArgs e)
         {
             m_propertyWindow.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemToolbox_Click(object sender, System.EventArgs e)
         {
             m_toolbox.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemOutputWindow_Click(object sender, System.EventArgs e)
         {
             m_outputWindow.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemTaskList_Click(object sender, System.EventArgs e)
         {
             m_taskList.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemAbout_Click(object sender, System.EventArgs e)
         {
             AboutDialog aboutDialog = new();
             aboutDialog.ShowDialog(this);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemNew_Click(object sender, System.EventArgs e)
         {
             DummyDoc dummyDoc = CreateNewDocument();
@@ -332,6 +340,7 @@ namespace DockSample
                 dummyDoc.Show(dockPanel);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemOpen_Click(object sender, System.EventArgs e)
         {
             OpenFileDialog openFile = new()
@@ -377,6 +386,7 @@ namespace DockSample
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemFile_Popup(object sender, System.EventArgs e)
         {
             if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
@@ -393,6 +403,7 @@ namespace DockSample
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemClose_Click(object sender, System.EventArgs e)
         {
             if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
@@ -401,6 +412,7 @@ namespace DockSample
                 dockPanel.ActiveDocument?.DockHandler.Close();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemCloseAll_Click(object sender, System.EventArgs e)
         {
             CloseAllDocuments();
@@ -425,16 +437,19 @@ namespace DockSample
                 File.Delete(configFile);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemToolBar_Click(object sender, System.EventArgs e)
         {
             toolBar.Visible = menuItemToolBar.Checked = !menuItemToolBar.Checked;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemStatusBar_Click(object sender, System.EventArgs e)
         {
             statusBar.Visible = menuItemStatusBar.Checked = !menuItemStatusBar.Checked;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void toolBar_ButtonClick(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == toolBarButtonNew)
@@ -457,6 +472,7 @@ namespace DockSample
                 menuItemLayoutByXml_Click(null, null);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemNewWindow_Click(object sender, System.EventArgs e)
         {
             MainForm newWindow = new();
@@ -464,16 +480,19 @@ namespace DockSample
             newWindow.Show();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemTools_Popup(object sender, System.EventArgs e)
         {
             menuItemLockLayout.Checked = !this.dockPanel.AllowEndUserDocking;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemLockLayout_Click(object sender, System.EventArgs e)
         {
             dockPanel.AllowEndUserDocking = !dockPanel.AllowEndUserDocking;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemLayoutByCode_Click(object sender, System.EventArgs e)
         {
             dockPanel.SuspendLayout(true);
@@ -544,6 +563,7 @@ namespace DockSample
             m_taskList = new DummyTaskList();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemLayoutByXml_Click(object sender, System.EventArgs e)
         {
             dockPanel.SuspendLayout(true);
@@ -561,6 +581,7 @@ namespace DockSample
             dockPanel.ResumeLayout(true, true);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemCloseAllButThisOne_Click(object sender, System.EventArgs e)
         {
             if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
@@ -582,11 +603,13 @@ namespace DockSample
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void menuItemShowDocumentIcon_Click(object sender, System.EventArgs e)
         {
             dockPanel.ShowDocumentIcon = menuItemShowDocumentIcon.Checked = !menuItemShowDocumentIcon.Checked;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void showRightToLeft_Click(object sender, EventArgs e)
         {
             CloseAllContents();
@@ -604,6 +627,7 @@ namespace DockSample
             showRightToLeft.Checked = !showRightToLeft.Checked;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Control event handler")]
         private void exitWithoutSavingLayout_Click(object sender, EventArgs e)
         {
             m_bSaveLayout = false;

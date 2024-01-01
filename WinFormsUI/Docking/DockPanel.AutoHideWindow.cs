@@ -34,6 +34,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             #endregion
 
             private readonly Timer m_timerMouseTrack;
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
             protected SplitterBase m_splitter { get; private set; }
 
             public AutoHideWindowControl(DockPanel dockPanel)

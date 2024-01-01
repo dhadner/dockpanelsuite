@@ -1094,6 +1094,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             ((EventHandler)Events[ActiveAutoHideContentChangedEvent])?.Invoke(this, e);
         }
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private void m_autoHideWindow_ActiveContentChanged(object sender, EventArgs e)
         {
             OnActiveAutoHideContentChanged(e);
