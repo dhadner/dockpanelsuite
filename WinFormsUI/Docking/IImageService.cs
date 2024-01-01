@@ -63,14 +63,14 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             var width = mask.Width;
             var height = mask.Height;
-            Bitmap input = new Bitmap(width, height);
+            Bitmap input = new(width, height);
             using (Graphics gfx = Graphics.FromImage(input))
             {
-                SolidBrush brush = new SolidBrush(glyph);
+                SolidBrush brush = new(glyph);
                 gfx.FillRectangle(brush, 0, 0, width, height);
             }
 
-            Bitmap output = new Bitmap(input.Width, input.Height, PixelFormat.Format32bppArgb);
+            Bitmap output = new(input.Width, input.Height, PixelFormat.Format32bppArgb);
             var rect = new Rectangle(0, 0, input.Width, input.Height);
             var bitsMask = mask.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
             var bitsInput = input.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
@@ -102,11 +102,11 @@ namespace WeifenLuo.WinFormsUI.Docking
                 border = background;
             }
 
-            Bitmap back = new Bitmap(width, height);
+            Bitmap back = new(width, height);
             using (Graphics gfx = Graphics.FromImage(back))
             {
-                SolidBrush brush = new SolidBrush(background);
-                SolidBrush brush2 = new SolidBrush(border.Value);
+                SolidBrush brush = new(background);
+                SolidBrush brush2 = new(border.Value);
                 gfx.FillRectangle(brush2, 0, 0, width, height);
                 if (background != border.Value)
                 {
@@ -122,7 +122,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public static Bitmap GetBackground(Color innerBorder, Color outerBorder, int width, IPaintingService painting)
         {
-            Bitmap back = new Bitmap(width, width);
+            Bitmap back = new(width, width);
             using (Graphics gfx = Graphics.FromImage(back))
             {
                 SolidBrush brush = painting.GetBrush(innerBorder);
@@ -136,7 +136,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public static Bitmap GetLayerImage(Color color, int width, IPaintingService painting)
         {
-            Bitmap back = new Bitmap(width, width);
+            Bitmap back = new(width, width);
             using (Graphics gfx = Graphics.FromImage(back))
             {
                 SolidBrush brush = painting.GetBrush(color);
@@ -173,7 +173,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 coreOut = MaskImages(coreIn, maskCore);
             }
 
-            Bitmap backIn = new Bitmap(width, height);
+            Bitmap backIn = new(width, height);
             using (Graphics gfx = Graphics.FromImage(backIn))
             {
                 SolidBrush brush = painting.GetBrush(background);

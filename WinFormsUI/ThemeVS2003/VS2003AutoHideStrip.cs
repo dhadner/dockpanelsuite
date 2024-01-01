@@ -55,13 +55,12 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_stringFormatTabHorizontal == null)
-                {
-                    _stringFormatTabHorizontal = new StringFormat();
-                    _stringFormatTabHorizontal.Alignment = StringAlignment.Near;
-                    _stringFormatTabHorizontal.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabHorizontal.FormatFlags = StringFormatFlags.NoWrap;
-                }
+                _stringFormatTabHorizontal ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap
+                    };
                 return _stringFormatTabHorizontal;
             }
         }
@@ -72,13 +71,12 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_stringFormatTabVertical == null)
-                {
-                    _stringFormatTabVertical = new StringFormat();
-                    _stringFormatTabVertical.Alignment = StringAlignment.Near;
-                    _stringFormatTabVertical.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabVertical.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical;
-                }
+                _stringFormatTabVertical ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical
+                    };
                 return _stringFormatTabVertical;
             }
         }
@@ -230,7 +228,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Matrix matrixIdentity = g.Transform;
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
             {
-                Matrix matrixRotated = new Matrix();
+                Matrix matrixRotated = new();
                 matrixRotated.RotateAt(90, new PointF((float)rectTabStrip.X + (float)rectTabStrip.Height / 2,
                     (float)rectTabStrip.Y + (float)rectTabStrip.Height / 2));
                 g.Transform = matrixRotated;
@@ -444,7 +442,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             pts[0].X = (float)rect.X + (float)rect.Width / 2;
             pts[0].Y = (float)rect.Y + (float)rect.Height / 2;
             Rectangle rectTabStrip = GetLogicalTabStripRectangle(dockState);
-            using (Matrix matrix = new Matrix())
+            using (Matrix matrix = new())
             {
                 matrix.RotateAt(90, new PointF((float)rectTabStrip.X + (float)rectTabStrip.Height / 2,
                                                (float)rectTabStrip.Y + (float)rectTabStrip.Height / 2));

@@ -30,7 +30,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         protected ToolStripRenderer ToolStripRenderer { get; set;}
 
         private Dictionary<ToolStrip, KeyValuePair<ToolStripRenderMode, ToolStripRenderer>> _stripBefore
-            = new Dictionary<ToolStrip, KeyValuePair<ToolStripRenderMode, ToolStripRenderer>>();
+            = new();
 
         public void ApplyTo(ToolStrip toolStrip)
         {
@@ -166,11 +166,11 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public static byte[] Decompress(byte[] fileToDecompress)
         {
-            using (MemoryStream originalFileStream = new MemoryStream(fileToDecompress))
+            using (MemoryStream originalFileStream = new(fileToDecompress))
             {
-                using (MemoryStream decompressedFileStream = new MemoryStream())
+                using (MemoryStream decompressedFileStream = new())
                 {
-                    using (GZipStream decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+                    using (GZipStream decompressionStream = new(originalFileStream, CompressionMode.Decompress))
                     {
                         //Copy the decompression stream into the output file.
                         byte[] buffer = new byte[4096];

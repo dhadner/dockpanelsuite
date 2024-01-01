@@ -48,14 +48,13 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_stringFormatTabHorizontal == null)
-                {
-                    _stringFormatTabHorizontal = new StringFormat();
-                    _stringFormatTabHorizontal.Alignment = StringAlignment.Near;
-                    _stringFormatTabHorizontal.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabHorizontal.FormatFlags = StringFormatFlags.NoWrap;
-                    _stringFormatTabHorizontal.Trimming = StringTrimming.None;
-                }
+                _stringFormatTabHorizontal ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap,
+                        Trimming = StringTrimming.None
+                    };
 
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabHorizontal.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -71,14 +70,13 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_stringFormatTabVertical == null)
-                {
-                    _stringFormatTabVertical = new StringFormat();
-                    _stringFormatTabVertical.Alignment = StringAlignment.Near;
-                    _stringFormatTabVertical.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabVertical.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical;
-                    _stringFormatTabVertical.Trimming = StringTrimming.None;
-                }
+                _stringFormatTabVertical ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical,
+                        Trimming = StringTrimming.None
+                    };
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabVertical.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                 else
@@ -90,7 +88,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         #endregion
 
-        private static Matrix _matrixIdentity = new Matrix();
+        private static Matrix _matrixIdentity = new();
         private static Matrix MatrixIdentity
         {
             get { return _matrixIdentity; }
@@ -118,8 +116,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_graphicsPath == null)
-                    _graphicsPath = new GraphicsPath();
+                _graphicsPath ??= new GraphicsPath();
 
                 return _graphicsPath;
             }
@@ -166,7 +163,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Matrix matrixIdentity = g.Transform;
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
             {
-                Matrix matrixRotated = new Matrix();
+                Matrix matrixRotated = new();
                 matrixRotated.RotateAt(90, new PointF((float)rectTabStrip.X + (float)rectTabStrip.Height / 2,
                     (float)rectTabStrip.Y + (float)rectTabStrip.Height / 2));
                 g.Transform = matrixRotated;

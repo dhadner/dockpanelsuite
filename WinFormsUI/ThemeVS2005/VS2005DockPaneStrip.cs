@@ -222,8 +222,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_imageButtonClose == null)
-                    m_imageButtonClose = Resources.DockPane_Close;
+                m_imageButtonClose ??= Resources.DockPane_Close;
 
                 return m_imageButtonClose;
             }
@@ -249,8 +248,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_imageButtonWindowList == null)
-                    m_imageButtonWindowList = Resources.DockPane_Option;
+                m_imageButtonWindowList ??= Resources.DockPane_Option;
 
                 return m_imageButtonWindowList;
             }
@@ -260,8 +258,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_imageButtonWindowListOverflow == null)
-                    m_imageButtonWindowListOverflow = Resources.DockPane_OptionOverflow;
+                m_imageButtonWindowListOverflow ??= Resources.DockPane_OptionOverflow;
 
                 return m_imageButtonWindowListOverflow;
             }
@@ -429,8 +426,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_toolTipClose == null)
-                    m_toolTipClose = Strings.DockPaneStrip_ToolTipClose;
+                m_toolTipClose ??= Strings.DockPaneStrip_ToolTipClose;
                 return m_toolTipClose;
             }
         }
@@ -439,8 +435,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_toolTipSelect == null)
-                    m_toolTipSelect = Strings.DockPaneStrip_ToolTipWindowList;
+                m_toolTipSelect ??= Strings.DockPaneStrip_ToolTipWindowList;
                 return m_toolTipSelect;
             }
         }
@@ -698,7 +693,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectTab = RectangleToScreen(DrawHelper.RtlTransform(this, rectTab));
             Rectangle rectPaneClient = DockPane.RectangleToScreen(DockPane.ClientRectangle);
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             GraphicsPath pathTab = GetTabOutline_Document(Tabs[index], true, true, true);
             path.AddPath(pathTab, true);
 
@@ -728,7 +723,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectTab = RectangleToScreen(DrawHelper.RtlTransform(this, rectTab));
             Rectangle rectPaneClient = DockPane.RectangleToScreen(DockPane.ClientRectangle);
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             GraphicsPath pathTab = GetTabOutline(Tabs[index], true, true);
             path.AddPath(pathTab, true);
             path.AddLine(rectTab.Left, rectTab.Top, rectPaneClient.Left, rectTab.Top);
@@ -1065,10 +1060,12 @@ namespace WeifenLuo.WinFormsUI.Docking
             Rectangle rectTabStrip = TabStripRectangle;
             TabVS2005 tab = (TabVS2005)Tabs[index];
 
-            Rectangle rect = new Rectangle();
-            rect.X = tab.TabX;
-            rect.Width = tab.TabWidth;
-            rect.Height = rectTabStrip.Height - DocumentTabGapTop;
+            Rectangle rect = new()
+            {
+                X = tab.TabX,
+                Width = tab.TabWidth,
+                Height = rectTabStrip.Height - DocumentTabGapTop
+            };
 
             if (DockPane.DockPanel.DocumentTabStripLocation == DocumentTabStripLocation.Bottom)
                 rect.Y = rectTabStrip.Y + DocumentStripGapBottom;
@@ -1280,7 +1277,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private void DrawTab_ToolWindow(Graphics g, TabVS2005 tab)
         {
             var rect = tab.Rectangle.Value;
-            Rectangle rectIcon = new Rectangle(
+            Rectangle rectIcon = new(
                 rect.X + ToolWindowImageGapLeft,
                 rect.Y + rect.Height - 1 - ToolWindowImageGapBottom - ToolWindowImageHeight,
                 ToolWindowImageWidth, ToolWindowImageHeight);
@@ -1303,7 +1300,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Color startColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.StartColor;
                 Color endColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.EndColor;
                 LinearGradientMode gradientMode = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.LinearGradientMode;
-                using (LinearGradientBrush brush = new LinearGradientBrush(rectTab, startColor, endColor, gradientMode))
+                using (LinearGradientBrush brush = new(rectTab, startColor, endColor, gradientMode))
                 {
                     g.FillPath(brush, path);
                 }
@@ -1318,15 +1315,15 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Color startColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.StartColor;
                 Color endColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor;
                 LinearGradientMode gradientMode = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.LinearGradientMode;
-                using (LinearGradientBrush brush1 = new LinearGradientBrush(rectTab, startColor, endColor, gradientMode))
+                using (LinearGradientBrush brush1 = new(rectTab, startColor, endColor, gradientMode))
                 {
                     g.FillPath(brush1, path);
                 }
 
                 if (Tabs.IndexOf(DockPane.ActiveContent) != Tabs.IndexOf(tab) + 1)
                 {
-                    Point pt1 = new Point(rect.Right, rect.Top + ToolWindowTabSeperatorGapTop);
-                    Point pt2 = new Point(rect.Right, rect.Bottom - ToolWindowTabSeperatorGapBottom);
+                    Point pt1 = new(rect.Right, rect.Top + ToolWindowTabSeperatorGapTop);
+                    Point pt2 = new(rect.Right, rect.Bottom - ToolWindowTabSeperatorGapBottom);
                     g.DrawLine(PenToolWindowTabBorder, DrawHelper.RtlTransform(this, pt1), DrawHelper.RtlTransform(this, pt2));
                 }
 
@@ -1344,7 +1341,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (tab.TabWidth == 0)
                 return;
 
-            Rectangle rectIcon = new Rectangle(
+            Rectangle rectIcon = new(
                 rect.X + DocumentIconGapLeft,
                 rect.Y + rect.Height - 1 - DocumentIconGapBottom - DocumentIconHeight,
                 DocumentIconWidth, DocumentIconHeight);
@@ -1378,7 +1375,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Color startColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor;
                 Color endColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor;
                 LinearGradientMode gradientMode = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.LinearGradientMode;
-                using (LinearGradientBrush brush = new LinearGradientBrush(rectBack, startColor, endColor, gradientMode))
+                using (LinearGradientBrush brush = new(rectBack, startColor, endColor, gradientMode))
                 {
                     g.FillPath(brush, path);
                 }
@@ -1396,7 +1393,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Color startColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor;
                 Color endColor = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor;
                 LinearGradientMode gradientMode = DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.LinearGradientMode;
-                using (LinearGradientBrush brush1 = new LinearGradientBrush(rectBack, startColor, endColor, gradientMode))
+                using (LinearGradientBrush brush1 = new(rectBack, startColor, endColor, gradientMode))
                 {
                     g.FillPath(brush1, path);
                 }
@@ -1450,8 +1447,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private void ContextMenuItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 IDockContent content = (IDockContent)item.Tag;
                 DockPane.ActiveContent = content;
@@ -1502,12 +1498,12 @@ namespace WeifenLuo.WinFormsUI.Docking
                 buttonWidth = buttonWidth * height / buttonHeight;
                 buttonHeight = height;
             }
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
 
             int x = rectTabStrip.X + rectTabStrip.Width - DocumentTabGapLeft
                 - DocumentButtonGapRight - buttonWidth;
             int y = rectTabStrip.Y + DocumentButtonGapTop;
-            Point point = new Point(x, y);
+            Point point = new(x, y);
             ButtonClose.Bounds = DrawHelper.RtlTransform(this, new Rectangle(point, buttonSize));
 
             // If the close button is not visible draw the window list button overtop.

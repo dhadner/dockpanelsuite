@@ -8,7 +8,7 @@ namespace WeifenLuo.WinFormsUI.Docking {
         {
             if (rectangle.Width > 0 && rectangle.Height > 0)
             {
-                using (LinearGradientBrush brush = new LinearGradientBrush(rectangle, startColor, endColor, mode))
+                using (LinearGradientBrush brush = new(rectangle, startColor, endColor, mode))
                 {
                     if (blend != null)
                     {
@@ -25,7 +25,7 @@ namespace WeifenLuo.WinFormsUI.Docking {
         {
             if (rectangle.Width > 0 && rectangle.Height > 0)
             {
-                using (LinearGradientBrush brush = new LinearGradientBrush(rectangle, startColor, endColor, mode))
+                using (LinearGradientBrush brush = new(rectangle, startColor, endColor, mode))
                 {
                     graphics.FillRectangle(brush, rectangle);
                 }

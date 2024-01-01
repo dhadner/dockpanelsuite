@@ -36,8 +36,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _highDpi = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -50,8 +49,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableHighDpi");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _highDpi = enable;
                     }
@@ -64,8 +62,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableHighDpi");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _highDpi = enable;
                             }
@@ -80,8 +77,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableHighDpi");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _highDpi = enable;
                             }
@@ -116,8 +112,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _memoryLeakFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -130,8 +125,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableMemoryLeakFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _memoryLeakFix = enable;
                     }
@@ -144,8 +138,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableMemoryLeakFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _memoryLeakFix = enable;
                             }
@@ -160,8 +153,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableMemoryLeakFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _memoryLeakFix = enable;
                             }
@@ -194,8 +186,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _focusLostFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -208,8 +199,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableMainWindowFocusLostFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _focusLostFix = enable;
                     }
@@ -222,8 +212,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableMainWindowFocusLostFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _focusLostFix = enable;
                             }
@@ -238,8 +227,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableMainWindowFocusLostFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _focusLostFix = enable;
                             }
@@ -272,8 +260,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _nestedDisposalFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -286,8 +273,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableNestedDisposalFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _nestedDisposalFix = enable;
                     }
@@ -300,8 +286,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableNestedDisposalFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _nestedDisposalFix = enable;
                             }
@@ -316,8 +301,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableNestedDisposalFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _nestedDisposalFix = enable;
                             }
@@ -350,8 +334,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _fontInheritanceFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -364,8 +347,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableFontInheritanceFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _fontInheritanceFix = enable;
                     }
@@ -378,8 +360,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableFontInheritanceFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _fontInheritanceFix = enable;
                             }
@@ -394,8 +375,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableFontInheritanceFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _fontInheritanceFix = enable;
                             }
@@ -428,8 +408,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _contentOrderFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -442,8 +421,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableContentOrderFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _contentOrderFix = enable;
                     }
@@ -456,8 +434,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableContentOrderFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _contentOrderFix = enable;
                             }
@@ -472,8 +449,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableContentOrderFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _contentOrderFix = enable;
                             }
@@ -506,8 +482,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _activeXFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -520,8 +495,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableActiveXFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _activeXFix = enable;
                     }
@@ -534,8 +508,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActiveXFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activeXFix = enable;
                             }
@@ -550,8 +523,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActiveXFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activeXFix = enable;
                             }
@@ -584,8 +556,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _displayingPaneFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -598,8 +569,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableDisplayingPaneFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _displayingPaneFix = enable;
                     }
@@ -612,8 +582,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableDisplayingPaneFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _displayingPaneFix = enable;
                             }
@@ -628,8 +597,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableDisplayingPaneFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _displayingPaneFix = enable;
                             }
@@ -662,8 +630,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _activeControlFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -676,8 +643,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableActiveControlFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _activeControlFix = enable;
                     }
@@ -690,8 +656,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActiveControlFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activeControlFix = enable;
                             }
@@ -706,8 +671,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActiveControlFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activeControlFix = enable;
                             }
@@ -740,8 +704,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _floatSplitterFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -754,8 +717,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableFloatSplitterFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _floatSplitterFix = enable;
                     }
@@ -768,8 +730,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableFloatSplitterFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _floatSplitterFix = enable;
                             }
@@ -784,8 +745,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableFloatSplitterFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _floatSplitterFix = enable;
                             }
@@ -818,8 +778,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _activateOnDockFix = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -832,8 +791,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableActivateOnDockFix");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _activateOnDockFix = enable;
                     }
@@ -846,8 +804,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActivateOnDockFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activateOnDockFix = enable;
                             }
@@ -862,8 +819,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableActivateOnDockFix");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _activateOnDockFix = enable;
                             }
@@ -896,8 +852,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _selectClosestOnClose = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -910,8 +865,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnableSelectClosestOnClose");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _selectClosestOnClose = enable;
                     }
@@ -924,8 +878,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableSelectClosestOnClose");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _selectClosestOnClose = enable;
                             }
@@ -940,8 +893,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnableSelectClosestOnClose");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _selectClosestOnClose = enable;
                             }
@@ -974,8 +926,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return _perScreenDpi = EnableAll;
                 }
 #if NET35 || NET40 || NET5_0_OR_GREATER
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
+                if (ConfigurationManager.GetSection("dockPanelSuite") is PatchSection section)
                 {
                     if (section.EnableAll != null)
                     {
@@ -988,8 +939,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 var environment = Environment.GetEnvironmentVariable("DPS_EnablePerScreenDpi");
                 if (!string.IsNullOrEmpty(environment))
                 {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
+                    if (bool.TryParse(environment, out bool enable))
                     {
                         return _perScreenDpi = enable;
                     }
@@ -1002,8 +952,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnablePerScreenDpi");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _perScreenDpi = enable;
                             }
@@ -1018,8 +967,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         var pair = key.GetValue("EnablePerScreenDpi");
                         if (pair != null)
                         {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
+                            if (bool.TryParse(pair.ToString(), out bool enable))
                             {
                                 return _perScreenDpi = enable;
                             }

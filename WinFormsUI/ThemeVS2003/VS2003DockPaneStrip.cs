@@ -185,8 +185,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageCloseEnabled == null)
-                    _imageCloseEnabled = Resources.DockPaneStrip_CloseEnabled;
+                _imageCloseEnabled ??= Resources.DockPaneStrip_CloseEnabled;
                 return _imageCloseEnabled;
             }
         }
@@ -197,8 +196,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageCloseDisabled == null)
-                    _imageCloseDisabled = Resources.DockPaneStrip_CloseDisabled;
+                _imageCloseDisabled ??= Resources.DockPaneStrip_CloseDisabled;
                 return _imageCloseDisabled;
             }
         }
@@ -209,8 +207,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageScrollLeftEnabled == null)
-                    _imageScrollLeftEnabled = Resources.DockPaneStrip_ScrollLeftEnabled;
+                _imageScrollLeftEnabled ??= Resources.DockPaneStrip_ScrollLeftEnabled;
                 return _imageScrollLeftEnabled;
             }
         }
@@ -221,8 +218,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageScrollLeftDisabled == null)
-                    _imageScrollLeftDisabled = Resources.DockPaneStrip_ScrollLeftDisabled;
+                _imageScrollLeftDisabled ??= Resources.DockPaneStrip_ScrollLeftDisabled;
                 return _imageScrollLeftDisabled;
             }
         }
@@ -233,8 +229,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageScrollRightEnabled == null)
-                    _imageScrollRightEnabled = Resources.DockPaneStrip_ScrollRightEnabled;
+                _imageScrollRightEnabled ??= Resources.DockPaneStrip_ScrollRightEnabled;
                 return _imageScrollRightEnabled;
             }
         }
@@ -245,8 +240,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageScrollRightDisabled == null)
-                    _imageScrollRightDisabled = Resources.DockPaneStrip_ScrollRightDisabled;
+                _imageScrollRightDisabled ??= Resources.DockPaneStrip_ScrollRightDisabled;
                 return _imageScrollRightDisabled;
             }
         }
@@ -257,8 +251,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipClose == null)
-                    _toolTipClose = Strings.DockPaneStrip_ToolTipClose;
+                _toolTipClose ??= Strings.DockPaneStrip_ToolTipClose;
                 return _toolTipClose;
             }
         }
@@ -269,8 +262,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipScrollLeft == null)
-                    _toolTipScrollLeft = Strings.DockPaneStrip_ToolTipScrollLeft;
+                _toolTipScrollLeft ??= Strings.DockPaneStrip_ToolTipScrollLeft;
                 return _toolTipScrollLeft;
             }
         }
@@ -281,8 +273,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipScrollRight == null)
-                    _toolTipScrollRight = Strings.DockPaneStrip_ToolTipScrollRight;
+                _toolTipScrollRight ??= Strings.DockPaneStrip_ToolTipScrollRight;
                 return _toolTipScrollRight;
             }
         }
@@ -537,7 +528,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 pts[7] = DockPane.PointToScreen(new Point(rectPaneClient.Left, y));
             }
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             path.AddLines(pts);
             return path;
         }
@@ -693,7 +684,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Size sizeText;
                 if (content == DockPane.ActiveContent && DockPane.IsActiveDocumentPane)
                 {
-                    using (Font boldFont = new Font(this.Font, FontStyle.Bold))
+                    using (Font boldFont = new(this.Font, FontStyle.Bold))
                     {
                         sizeText = TextRenderer.MeasureText(g, content.DockHandler.TabText, boldFont, new Size(DocumentTabMaxWidth, height), DocumentTextFormat);
                     }
@@ -801,7 +792,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private void DrawTab_ToolWindow(Graphics g, TabVS2003 tab)
         {
             var rect = tab.Rectangle.Value;
-            Rectangle rectIcon = new Rectangle(
+            Rectangle rectIcon = new(
                 rect.X + ToolWindowImageGapLeft,
                 rect.Y + rect.Height - 1 - ToolWindowImageGapBottom - ToolWindowImageHeight,
                 ToolWindowImageWidth, ToolWindowImageHeight);
@@ -858,7 +849,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (DockPane.DockPanel.ShowDocumentIcon)
                 {
                     Icon icon = (tab.Content as Form).Icon;
-                    Rectangle rectIcon = new Rectangle(
+                    Rectangle rectIcon = new(
                         rect.X + DocumentIconGapLeft,
                         rect.Y + (rect.Height - DocumentIconHeight) / 2,
                         DocumentIconWidth, DocumentIconHeight);
@@ -868,7 +859,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 if (DockPane.IsActiveDocumentPane)
                 {
-                    using (Font boldFont = new Font(this.Font, FontStyle.Bold))
+                    using (Font boldFont = new(this.Font, FontStyle.Bold))
                     {
                         TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, boldFont, rectText, ActiveTextColor, DocumentTextFormat);
                     }
@@ -886,7 +877,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (DockPane.DockPanel.ShowDocumentIcon)
                 {
                     Icon icon = tab.ContentForm.Icon;
-                    Rectangle rectIcon = new Rectangle(
+                    Rectangle rectIcon = new(
                         rect.X + DocumentIconGapLeft,
                         rect.Y + (rect.Height - DocumentIconHeight) / 2,
                         DocumentIconWidth, DocumentIconHeight);
@@ -1011,7 +1002,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 buttonWidth = buttonWidth * height / buttonHeight;
                 buttonHeight = height;
             }
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
             m_buttonClose.Size = m_buttonScrollLeft.Size = m_buttonScrollRight.Size = buttonSize;
             int x = rectTabStrip.X + rectTabStrip.Width - DocumentTabGapLeft
                 - DocumentButtonGapRight - buttonWidth;

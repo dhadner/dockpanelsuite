@@ -126,12 +126,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2005
                     using (GraphicsPath path = pane.TabStripControl.GetOutline(contentIndex))
                     {
                         RectangleF rectF = path.GetBounds();
-                        Rectangle rect = new Rectangle((int)rectF.X, (int)rectF.Y, (int)rectF.Width, (int)rectF.Height);
-                        using (Matrix matrix = new Matrix(rect, new Point[] { new Point(0, 0), new Point(rect.Width, 0), new Point(0, rect.Height) }))
+                        Rectangle rect = new((int)rectF.X, (int)rectF.Y, (int)rectF.Width, (int)rectF.Height);
+                        using (Matrix matrix = new(rect, new Point[] { new(0, 0), new(rect.Width, 0), new(0, rect.Height) }))
                         {
                             path.Transform(matrix);
                         }
-                        Region region = new Region(path);
+                        Region region = new(path);
                         SetDragForm(rect, region);
                     }
                 }
@@ -142,10 +142,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2005
                 DragForm.Bounds = rect;
                 if (rect == Rectangle.Empty)
                 {
-                    if (DragForm.Region != null)
-                    {
-                        DragForm.Region.Dispose();
-                    }
+                    DragForm.Region?.Dispose();
 
                     DragForm.Region = new Region(Rectangle.Empty);
                 }

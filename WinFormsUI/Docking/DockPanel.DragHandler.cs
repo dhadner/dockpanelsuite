@@ -147,7 +147,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             protected sealed override Control DragControl
             {
-                get { return DragSource == null ? null : DragSource.DragControl; }
+                get { return DragSource?.DragControl; }
             }
 
             protected sealed override bool OnPreFilterMessage(ref Message m)

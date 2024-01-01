@@ -10,16 +10,16 @@ namespace WeifenLuo.WinFormsUI.Docking
     {
         private static Rectangle[] baseSizeGripRectangles =
         {
-            new Rectangle(6,0,1,1),
-            new Rectangle(6,2,1,1),
-            new Rectangle(6,4,1,1),
-            new Rectangle(6,6,1,1),
-            new Rectangle(4,2,1,1),
-            new Rectangle(4,4,1,1),
-            new Rectangle(4,6,1,1),
-            new Rectangle(2,4,1,1),
-            new Rectangle(2,6,1,1),
-            new Rectangle(0,6,1,1)
+            new(6,0,1,1),
+            new(6,2,1,1),
+            new(6,4,1,1),
+            new(6,6,1,1),
+            new(4,2,1,1),
+            new(4,4,1,1),
+            new(4,6,1,1),
+            new(2,4,1,1),
+            new(2,6,1,1),
+            new(0,6,1,1)
         };
 
         private const int GRIP_PADDING = 4;
@@ -99,22 +99,19 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
         {
-            var status = e.ToolStrip as StatusStrip;
-            if (status != null)
+            if (e.ToolStrip is StatusStrip status)
             {
                 // IMPORTANT: left empty to remove white border.
                 return;
             }
 
-            var context = e.ToolStrip as MenuStrip;
-            if (context != null)
+            if (e.ToolStrip is MenuStrip context)
             {
                 base.OnRenderToolStripBorder(e);
                 return;
             }
 
-            var drop = e.ToolStrip as ToolStripDropDown;
-            if (drop != null)
+            if (e.ToolStrip is ToolStripDropDown drop)
             {
                 base.OnRenderToolStripBorder(e);
                 return;
@@ -126,22 +123,19 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
-            var status = e.ToolStrip as StatusStrip;
-            if (status != null)
+            if (e.ToolStrip is StatusStrip status)
             {
                 base.OnRenderToolStripBackground(e);
                 return;
             }
 
-            var context = e.ToolStrip as MenuStrip;
-            if (context != null)
+            if (e.ToolStrip is MenuStrip context)
             {
                 base.OnRenderToolStripBackground(e);
                 return;
             }
 
-            var drop = e.ToolStrip as ToolStripDropDown;
-            if (drop != null)
+            if (e.ToolStrip is ToolStripDropDown drop)
             {
                 base.OnRenderToolStripBackground(e);
                 return;
@@ -154,13 +148,12 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             // IMPORTANT: below code was taken from Microsoft's reference code (MIT license).
             Graphics g = e.Graphics;
-            StatusStrip statusStrip = e.ToolStrip as StatusStrip;
 
             // we have a set of stock rectangles.  Translate them over to where the grip is to be drawn
             // for the white set, then translate them up and right one pixel for the grey.
 
 
-            if (statusStrip != null)
+            if (e.ToolStrip is StatusStrip statusStrip)
             {
                 Rectangle sizeGripBounds = statusStrip.SizeGripBounds;
                 if (!LayoutUtils.IsZeroWidthOrHeight(sizeGripBounds))
@@ -262,13 +255,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
-            ToolStripButton button = e.Item as ToolStripButton;
-            if (button != null && button.Enabled)
+            if (e.Item is ToolStripButton button && button.Enabled)
             {
                 if (button.Selected || button.Checked)
                 {
                     // Rect of item's content area.
-                    Rectangle contentRect = new Rectangle(0, 0, button.Width - 1, button.Height - 1);
+                    Rectangle contentRect = new(0, 0, button.Width - 1, button.Height - 1);
 
                     Color pen;
                     Color brushBegin;
@@ -354,11 +346,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 // Create a color map.
                 ColorMap[] colorMap = new ColorMap[1];
-                colorMap[0] = new ColorMap();
-
-                // old color determined from testing
-                colorMap[0].OldColor = Color.FromArgb(4, 2, 4);
-                colorMap[0].NewColor = foreColor;
+                colorMap[0] = new ColorMap
+                {
+                    // old color determined from testing
+                    OldColor = Color.FromArgb(4, 2, 4),
+                    NewColor = foreColor
+                };
                 imageAttr.SetRemapTable(colorMap);
 
                 using (var b = new SolidBrush(backColor))
@@ -392,8 +385,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 // if this is a menu, then account for the image column
                 int x1 = r.X;
                 int x2 = r.X + r.Width;
-                var menu = e.ToolStrip as ToolStripDropDownMenu;
-                if (menu != null)
+                if (e.ToolStrip is ToolStripDropDownMenu menu)
                 {
                     x1 += menu.Padding.Left;
                     x2 -= menu.Padding.Right;
@@ -504,11 +496,11 @@ namespace WeifenLuo.WinFormsUI.Docking
         private static void DrawRectangle(Graphics graphics, Rectangle rect, Color brushBegin, 
             Color brushMiddle, Color brushEnd, Color penColor, bool glass)
         {
-            RectangleF firstHalf = new RectangleF(
+            RectangleF firstHalf = new(
                 rect.X, rect.Y, 
                 rect.Width, (float)rect.Height / 2);
 
-            RectangleF secondHalf = new RectangleF(
+            RectangleF secondHalf = new(
                 rect.X, rect.Y + (float)rect.Height / 2, 
                 rect.Width, (float)rect.Height / 2);
 
@@ -562,7 +554,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private static void FillRoundRectangle(Graphics graphics, Brush brush, float x, float y, float width, float height, float radius)
         {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
+            RectangleF rectangle = new(x, y, width, height);
             GraphicsPath path = GetRoundedRect(rectangle, radius);
             graphics.FillPath(brush, path);
         }
@@ -579,7 +571,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private static void DrawRoundRectangle(Graphics graphics, Pen pen, float x, float y, float width, float height, float radius)
         {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
+            RectangleF rectangle = new(x, y, width, height);
             GraphicsPath path = GetRoundedRect(rectangle, radius);
             graphics.DrawPath(pen, path);
         }
@@ -591,7 +583,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (radius <= 0)
             {
-                GraphicsPath mPath = new GraphicsPath();
+                GraphicsPath mPath = new();
                 mPath.AddRectangle(baseRect);
                 mPath.CloseFigure();
                 return mPath;
@@ -608,9 +600,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             // a graphics path object for the drawing 
 
             float diameter = radius * 2.0F;
-            SizeF sizeF = new SizeF(diameter, diameter);
-            RectangleF arc = new RectangleF(baseRect.Location, sizeF);
-            GraphicsPath path = new GraphicsPath();
+            SizeF sizeF = new(diameter, diameter);
+            RectangleF arc = new(baseRect.Location, sizeF);
+            GraphicsPath path = new();
 
             // top left arc 
             path.AddArc(arc, 180, 90);
@@ -634,7 +626,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private static GraphicsPath GetCapsule(RectangleF baseRect)
         {
             RectangleF arc;
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             try
             {
@@ -643,7 +635,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     // return horizontal capsule 
                     diameter = baseRect.Height;
-                    SizeF sizeF = new SizeF(diameter, diameter);
+                    SizeF sizeF = new(diameter, diameter);
                     arc = new RectangleF(baseRect.Location, sizeF);
                     path.AddArc(arc, 90, 180);
                     arc.X = baseRect.Right - diameter;
@@ -653,7 +645,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     // return vertical capsule 
                     diameter = baseRect.Width;
-                    SizeF sizeF = new SizeF(diameter, diameter);
+                    SizeF sizeF = new(diameter, diameter);
                     arc = new RectangleF(baseRect.Location, sizeF);
                     path.AddArc(arc, 180, 180);
                     arc.Y = baseRect.Bottom - diameter;

@@ -32,9 +32,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             private class HookEventArgs : EventArgs
             {
-                [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
                 public int HookCode;
-                [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
                 public IntPtr wParam;
                 public IntPtr lParam;
             }
@@ -70,10 +68,12 @@ namespace WeifenLuo.WinFormsUI.Docking
                         return NativeMethods.CallNextHookEx(m_hHook, code, wParam, lParam);
 
                     // Let clients determine what to do
-                    HookEventArgs e = new HookEventArgs();
-                    e.HookCode = code;
-                    e.wParam = wParam;
-                    e.lParam = lParam;
+                    HookEventArgs e = new()
+                    {
+                        HookCode = code,
+                        wParam = wParam,
+                        lParam = lParam
+                    };
                     OnHookInvoked(e);
 
                     // Yield to the next hook in the chain
@@ -214,7 +214,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 NativeMethods.SetFocus(handler.Form.Handle);
             }
 
-            private List<IDockContent> m_listContent = new List<IDockContent>();
+            private List<IDockContent> m_listContent = new();
             private List<IDockContent> ListContent
             {
                 get { return m_listContent; }
@@ -441,13 +441,11 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (m_activePane == value)
                     return;
 
-                if (m_activePane != null)
-                    m_activePane.SetIsActivated(false);
+                m_activePane?.SetIsActivated(false);
 
                 m_activePane = value;
 
-                if (m_activePane != null)
-                    m_activePane.SetIsActivated(true);
+                m_activePane?.SetIsActivated(true);
             }
 
             private IDockContent m_activeContent = null;
@@ -458,7 +456,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             internal void SetActiveContent()
             {
-                IDockContent value = ActivePane == null ? null : ActivePane.ActiveContent;
+                IDockContent value = ActivePane?.ActiveContent;
 
                 if (m_activeContent == value)
                     return;
@@ -502,13 +500,11 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (m_activeDocumentPane == value)
                     return;
 
-                if (m_activeDocumentPane != null)
-                    m_activeDocumentPane.SetIsActiveDocumentPane(false);
+                m_activeDocumentPane?.SetIsActiveDocumentPane(false);
 
                 m_activeDocumentPane = value;
 
-                if (m_activeDocumentPane != null)
-                    m_activeDocumentPane.SetIsActiveDocumentPane(true);
+                m_activeDocumentPane?.SetIsActiveDocumentPane(true);
             }
 
             private IDockContent m_activeDocument = null;
@@ -519,7 +515,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private void SetActiveDocument()
             {
-                IDockContent value = ActiveDocumentPane == null ? null : ActiveDocumentPane.ActiveContent;
+                IDockContent value = ActiveDocumentPane?.ActiveContent;
 
                 if (m_activeDocument == value)
                     return;
@@ -567,7 +563,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             get { return FocusManager.ActiveDocumentPane; }
         }
 
-        private static readonly object ActiveDocumentChangedEvent = new object();
+        private static readonly object ActiveDocumentChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveDocumentChanged_Description")]
         public event EventHandler ActiveDocumentChanged
@@ -582,7 +578,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, e);
         }
 
-        private static readonly object ActiveContentChangedEvent = new object();
+        private static readonly object ActiveContentChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveContentChanged_Description")]
         public event EventHandler ActiveContentChanged
@@ -598,7 +594,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, e);
         }
 
-        private static readonly object DocumentDraggedEvent = new object();
+        private static readonly object DocumentDraggedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveContentChanged_Description")]
         public event EventHandler DocumentDragged
@@ -614,7 +610,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, EventArgs.Empty);
         }
 
-        private static readonly object ActivePaneChangedEvent = new object();
+        private static readonly object ActivePaneChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActivePaneChanged_Description")]
         public event EventHandler ActivePaneChanged

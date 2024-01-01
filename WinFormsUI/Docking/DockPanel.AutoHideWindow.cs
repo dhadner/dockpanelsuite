@@ -10,14 +10,9 @@ namespace WeifenLuo.WinFormsUI.Docking
         [ToolboxItem(false)]
         public class AutoHideWindowControl : Panel, ISplitterHost
         {
-            protected class SplitterControl : SplitterBase
+            protected class SplitterControl(AutoHideWindowControl autoHideWindow) : SplitterBase
             {
-                public SplitterControl(AutoHideWindowControl autoHideWindow)
-                {
-                    m_autoHideWindow = autoHideWindow;
-                }
-
-                private AutoHideWindowControl m_autoHideWindow;
+                private readonly AutoHideWindowControl m_autoHideWindow = autoHideWindow;
                 private AutoHideWindowControl AutoHideWindow
                 {
                     get { return m_autoHideWindow; }
@@ -38,7 +33,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             private const int ANIMATE_TIME = 100;    // in mini-seconds
             #endregion
 
-            private Timer m_timerMouseTrack;
+            private readonly Timer m_timerMouseTrack;
             protected SplitterBase m_splitter { get; private set; }
 
             public AutoHideWindowControl(DockPanel dockPanel)
@@ -67,7 +62,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 get { return false; }
             }
 
-            private DockPanel m_dockPanel = null;
+            private readonly DockPanel m_dockPanel = null;
             public DockPanel DockPanel
             {
                 get { return m_dockPanel; }
@@ -81,7 +76,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private void SetActivePane()
             {
-                DockPane value = (ActiveContent == null ? null : ActiveContent.DockHandler.Pane);
+                DockPane value = ActiveContent?.DockHandler.Pane;
 
                 if (value == m_activePane)
                     return;
@@ -89,7 +84,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 m_activePane = value;
             }
 
-            private static readonly object AutoHideActiveContentChangedEvent = new object();
+            private static readonly object AutoHideActiveContentChangedEvent = new();
             public event EventHandler ActiveContentChanged
             {
                 add { Events.AddHandler(AutoHideActiveContentChangedEvent, value); }
@@ -98,9 +93,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             protected virtual void OnActiveContentChanged(EventArgs e)
             {
-                EventHandler handler = (EventHandler)Events[ActiveContentChangedEvent];
-                if (handler != null)
-                    handler(this, e);
+                ((EventHandler)Events[ActiveContentChangedEvent])?.Invoke(this, e);
             }
 
             private IDockContent m_activeContent = null;
@@ -244,14 +237,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                         rectSource.Height = rectTarget.Height;
 
                     LayoutAnimateWindow(rectSource);
-                    if (Parent != null)
-                        Parent.Update();
+                    Parent?.Update();
 
                     remainPixels -= speedFactor;
 
                     while (true)
                     {
-                        TimeSpan time = new TimeSpan(0, 0, 0, 0, ANIMATE_TIME);
+                        TimeSpan time = new(0, 0, 0, 0, ANIMATE_TIME);
                         TimeSpan elapsedPerMove = DateTime.Now - startPerMove;
                         TimeSpan elapsedTime = DateTime.Now - startingTime;
                         if (((int)((time - elapsedTime).TotalMilliseconds)) <= 0)

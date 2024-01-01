@@ -11,15 +11,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     public abstract class DockPaneStripBase : Control
     {
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]        
-        protected internal class Tab : IDisposable
+        protected internal class Tab(IDockContent content) : IDisposable
         {
-            private IDockContent m_content;
-
-            public Tab(IDockContent content)
-            {
-                m_content = content;
-            }
+            private readonly IDockContent m_content = content;
 
             ~Tab()
             {
@@ -67,7 +61,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]        
         protected sealed class TabCollection : IEnumerable<Tab>
         {
             #region IEnumerable Members
@@ -89,7 +82,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 m_dockPane = pane;
             }
 
-            private DockPane m_dockPane;
+            private readonly DockPane m_dockPane;
             public DockPane DockPane
             {
                 get { return m_dockPane; }
@@ -104,9 +97,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             {
                 get
                 {
-                    IDockContent content = DockPane.DisplayingContents[index];
-                    if (content == null)
-                        throw (new ArgumentOutOfRangeException(nameof(index)));
+                    IDockContent content = DockPane.DisplayingContents[index] ?? throw (new ArgumentOutOfRangeException(nameof(index)));
                     return content.DockHandler.GetTab(DockPane.TabStripControl);
                 }
             }
@@ -144,7 +135,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             AllowDrop = true;
         }
 
-        private DockPane m_dockPane;
+        private readonly DockPane m_dockPane;
         protected DockPane DockPane
         {
             get { return m_dockPane; }
@@ -161,7 +152,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                return m_tabs ?? (m_tabs = new TabCollection(DockPane));
+                return m_tabs ??= new TabCollection(DockPane);
             }
         }
 
@@ -276,7 +267,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             if (index > 0 && DockPane.DockPanel.DocumentStyle == DocumentStyle.DockingWindow)
             {
-                index = index - 1;
+                index--;
 
                 if (index >= 0 || index < Tabs.Count)                
                     DockPane.ActiveContent = Tabs[index].Content;                
@@ -348,15 +339,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             return new DockPaneStripAccessibleObject(this);
         }
 
-        public class DockPaneStripAccessibleObject : Control.ControlAccessibleObject
+        public class DockPaneStripAccessibleObject(DockPaneStripBase strip) : Control.ControlAccessibleObject(strip)
         {
-            private DockPaneStripBase _strip;
-
-            public DockPaneStripAccessibleObject(DockPaneStripBase strip)
-                : base(strip)
-            {
-                _strip = strip;
-            }
+            private readonly DockPaneStripBase _strip = strip;
 
             public override AccessibleRole Role
             {
@@ -378,7 +363,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject HitTest(int x, int y)
             {
-                Point point = new Point(x, y);
+                Point point = new(x, y);
                 foreach (Tab tab in _strip.Tabs)
                 {
                     Rectangle rectangle = _strip.GetTabBounds(tab);
@@ -392,10 +377,10 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected class DockPaneStripTabAccessibleObject : AccessibleObject
         {
-            private DockPaneStripBase _strip;
-            private Tab _tab;
+            private readonly DockPaneStripBase _strip;
+            private readonly Tab _tab;
 
-            private AccessibleObject _parent;
+            private readonly AccessibleObject _parent;
 
             internal DockPaneStripTabAccessibleObject(DockPaneStripBase strip, Tab tab, AccessibleObject parent)
             {

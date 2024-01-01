@@ -28,7 +28,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         internal static DockPanelSkin CreateVisualStudio2003()
         {
-            DockPanelSkin skin = new DockPanelSkin();
+            DockPanelSkin skin = new();
 
             skin.AutoHideStripSkin.DockStripGradient.StartColor = SystemColors.ControlLight;
             skin.AutoHideStripSkin.DockStripGradient.EndColor = SystemColors.ControlLight;

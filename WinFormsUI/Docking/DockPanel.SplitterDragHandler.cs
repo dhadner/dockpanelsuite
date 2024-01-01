@@ -148,8 +148,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private SplitterDragHandler m_splitterDragHandler = null;
         private SplitterDragHandler GetSplitterDragHandler()
         {
-            if (m_splitterDragHandler == null)
-                m_splitterDragHandler = new SplitterDragHandler(this);
+            m_splitterDragHandler ??= new SplitterDragHandler(this);
             return m_splitterDragHandler;
         }
 

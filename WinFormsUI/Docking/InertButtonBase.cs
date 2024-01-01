@@ -115,21 +115,25 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (IsMouseOver && Enabled)
             {
-                using (Pen pen = new Pen(ForeColor))
+                using (Pen pen = new(ForeColor))
                 {
                     e.Graphics.DrawRectangle(pen, Rectangle.Inflate(ClientRectangle, -1, -1));
                 }
             }
 
-            using (ImageAttributes imageAttributes = new ImageAttributes())
+            using (ImageAttributes imageAttributes = new())
             {
                 ColorMap[] colorMap = new ColorMap[2];
-                colorMap[0] = new ColorMap();
-                colorMap[0].OldColor = Color.FromArgb(0, 0, 0);
-                colorMap[0].NewColor = ForeColor;
-                colorMap[1] = new ColorMap();
-                colorMap[1].OldColor = Image.GetPixel(0, 0);
-                colorMap[1].NewColor = Color.Transparent;
+                colorMap[0] = new ColorMap
+                {
+                    OldColor = Color.FromArgb(0, 0, 0),
+                    NewColor = ForeColor
+                };
+                colorMap[1] = new ColorMap
+                {
+                    OldColor = Image.GetPixel(0, 0),
+                    NewColor = Color.Transparent
+                };
 
                 imageAttributes.SetRemapTable(colorMap);
 

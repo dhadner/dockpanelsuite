@@ -41,7 +41,6 @@ namespace WeifenLuo.WinFormsUI.Docking
         //*********************************
         // FxCop bug, suppress the message
         //*********************************
-        [SuppressMessage("Microsoft.Portability", "CA1901:PInvokeDeclarationsShouldBePortable", MessageId = "0")]
         public static extern IntPtr WindowFromPoint(Point point);
 
         [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]

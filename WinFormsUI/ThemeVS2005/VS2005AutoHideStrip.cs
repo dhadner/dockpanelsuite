@@ -55,14 +55,13 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_stringFormatTabHorizontal == null)
-                {
-                    _stringFormatTabHorizontal = new StringFormat();
-                    _stringFormatTabHorizontal.Alignment = StringAlignment.Near;
-                    _stringFormatTabHorizontal.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabHorizontal.FormatFlags = StringFormatFlags.NoWrap;
-                    _stringFormatTabHorizontal.Trimming = StringTrimming.None;
-                }
+                _stringFormatTabHorizontal ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap,
+                        Trimming = StringTrimming.None
+                    };
 
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabHorizontal.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -78,14 +77,13 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_stringFormatTabVertical == null)
-                {
-                    _stringFormatTabVertical = new StringFormat();
-                    _stringFormatTabVertical.Alignment = StringAlignment.Near;
-                    _stringFormatTabVertical.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabVertical.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical;
-                    _stringFormatTabVertical.Trimming = StringTrimming.None;
-                }
+                _stringFormatTabVertical ??= new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical,
+                        Trimming = StringTrimming.None
+                    };
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabVertical.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                 else
@@ -156,7 +154,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         #endregion
 
-        private static Matrix _matrixIdentity = new Matrix();
+        private static Matrix _matrixIdentity = new();
         private static Matrix MatrixIdentity
         {
             get { return _matrixIdentity; }
@@ -184,8 +182,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_graphicsPath == null)
-                    _graphicsPath = new GraphicsPath();
+                _graphicsPath ??= new GraphicsPath();
 
                 return _graphicsPath;
             }
@@ -238,7 +235,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Matrix matrixIdentity = g.Transform;
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
             {
-                Matrix matrixRotated = new Matrix();
+                Matrix matrixRotated = new();
                 matrixRotated.RotateAt(90, new PointF((float)rectTabStrip.X + (float)rectTabStrip.Height / 2,
                     (float)rectTabStrip.Y + (float)rectTabStrip.Height / 2));
                 g.Transform = matrixRotated;
@@ -322,7 +319,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Color startColor = DockPanel.Theme.Skin.AutoHideStripSkin.TabGradient.StartColor;
             Color endColor = DockPanel.Theme.Skin.AutoHideStripSkin.TabGradient.EndColor;
             LinearGradientMode gradientMode = DockPanel.Theme.Skin.AutoHideStripSkin.TabGradient.LinearGradientMode;
-            using (LinearGradientBrush brushPath = new LinearGradientBrush(rectTabOrigin, startColor, endColor, gradientMode))
+            using (LinearGradientBrush brushPath = new(rectTabOrigin, startColor, endColor, gradientMode))
             {
                 g.FillPath(brushPath, path);
             }
@@ -352,12 +349,12 @@ namespace WeifenLuo.WinFormsUI.Docking
                     Rectangle rectTransform = RtlTransform(rectImage, dockState);
                     Point[] rotationPoints =
                         { 
-                            new Point(rectTransform.X + rectTransform.Width, rectTransform.Y), 
-                            new Point(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height), 
-                            new Point(rectTransform.X, rectTransform.Y)
+                            new(rectTransform.X + rectTransform.Width, rectTransform.Y), 
+                            new(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height), 
+                            new(rectTransform.X, rectTransform.Y)
                         };
 
-                    using (Icon rotatedIcon = new Icon(((Form)content).Icon, 16, 16))
+                    using (Icon rotatedIcon = new(((Form)content).Icon, 16, 16))
                     {
                         g.DrawImage(rotatedIcon.ToBitmap(), rotationPoints);
                     }

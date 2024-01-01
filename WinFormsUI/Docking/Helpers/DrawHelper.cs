@@ -58,7 +58,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         // From http://edu.cnzz.cn/show_3281.html
         public static GraphicsPath CalculateGraphicsPathFromBitmap(Bitmap bitmap, Color colorTransparent) 
         { 
-            GraphicsPath graphicsPath = new GraphicsPath(); 
+            GraphicsPath graphicsPath = new(); 
             if (colorTransparent == Color.Empty)
                 colorTransparent = bitmap.GetPixel(0, 0); 
 

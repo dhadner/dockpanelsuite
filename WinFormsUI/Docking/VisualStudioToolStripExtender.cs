@@ -12,7 +12,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             private VsVersion version = VsVersion.Unknown;
             private readonly ToolStrip strip;
-            private readonly Dictionary<ToolStripItem, string> menuText = new Dictionary<ToolStripItem, string>();
+            private readonly Dictionary<ToolStripItem, string> menuText = new();
             
 
             public ToolStripProperties(ToolStrip toolstrip)
@@ -50,7 +50,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        private readonly Dictionary<ToolStrip, ToolStripProperties> strips = new Dictionary<ToolStrip, ToolStripProperties>();
+        private readonly Dictionary<ToolStrip, ToolStripProperties> strips = new();
 
         public VisualStudioToolStripExtender()
         {

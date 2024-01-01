@@ -10,6 +10,7 @@ using System.Collections.Generic;
 // #2 Use "resfinder" in the toolbox bitmap attribute instead of the control name.
 // #3 use the "<default namespace>.<resourcename>" string to locate the resource.
 // See: http://www.bobpowell.net/toolboxbitmap.htm
+[SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
 #pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
 internal class resfinder
 #pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
@@ -51,13 +52,15 @@ namespace WeifenLuo.WinFormsUI.Docking
             ShowAutoHideContentOnHover = true;
 
             m_focusManager = new FocusManagerImpl(this);
-            m_panes = new DockPaneCollection();
-            m_floatWindows = new FloatWindowCollection();
+            m_panes = [];
+            m_floatWindows = [];
 
             SuspendLayout();
 
-            m_dummyControl = new DummyControl();
-            m_dummyControl.Bounds = new Rectangle(0, 0, 1, 1);
+            m_dummyControl = new DummyControl
+            {
+                Bounds = new Rectangle(0, 0, 1, 1)
+            };
             Controls.Add(m_dummyControl);
 
             Theme.ApplyTo(this);
@@ -137,8 +140,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         internal void ResetAutoHideStripControl()
         {
-            if (m_autoHideStripControl != null)
-                m_autoHideStripControl.Dispose();
+            m_autoHideStripControl?.Dispose();
 
             m_autoHideStripControl = null;
         }
@@ -238,7 +240,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        private DockContentCollection m_contents = new DockContentCollection();
+        private DockContentCollection m_contents = [];
         [Browsable(false)]
         public DockContentCollection Contents
         {
@@ -371,8 +373,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
 
                 if (Math.Abs(value - m_dockBottomPortion) < double.Epsilon)
                     return;
@@ -403,8 +404,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
 
                 if (Math.Abs(value - m_dockLeftPortion) < double.Epsilon)
                     return;
@@ -434,8 +434,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
 
                 if (Math.Abs(value - m_dockRightPortion) < double.Epsilon)
                     return;
@@ -466,8 +465,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
 
                 if (Math.Abs(value - m_dockTopPortion) < double.Epsilon)
                     return;
@@ -743,14 +741,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                 return;
 
             Graphics g = e.Graphics;
-            SolidBrush bgBrush = new SolidBrush(DockBackColor);
+            SolidBrush bgBrush = new(DockBackColor);
             g.FillRectangle(bgBrush, ClientRectangle);
         }
 
         internal void AddContent(IDockContent content)
         {
-            if (content == null)
-                throw(new ArgumentNullException());
+            ArgumentNullException.ThrowIfNull(content);
 
             if (!Contents.Contains(content))
             {
@@ -791,14 +788,15 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         internal void RemoveContent(IDockContent content)
         {
-            if (content == null)
-                throw(new ArgumentNullException());
-            
+            ArgumentNullException.ThrowIfNull(content);
+
+#pragma warning disable CA1868 // Unnecessary call to 'Contains(item)'
             if (Contents.Contains(content))
             {
                 Contents.Remove(content);
                 OnContentRemoved(new DockContentEventArgs(content));
             }
+#pragma warning restore CA1868 // Unnecessary call to 'Contains(item)'
         }
 
         internal void RemovePane(DockPane pane)
@@ -959,8 +957,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (DesignMode)
                 return;
 
-            if (m_dummyControlPaintEventHandler == null)
-                m_dummyControlPaintEventHandler = new PaintEventHandler(DummyControl_Paint);
+            m_dummyControlPaintEventHandler ??= new PaintEventHandler(DummyControl_Paint);
 
             DummyControl.Paint += m_dummyControlPaintEventHandler;
             DummyControl.Invalidate();
@@ -991,7 +988,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private void UpdateWindowRegion_EmptyDocumentArea()
         {
             Rectangle rect = DocumentWindowBounds;
-            SetRegion(new Rectangle[] { rect });
+            SetRegion([rect]);
         }
 
         private void UpdateWindowRegion_ClipContent()
@@ -1037,13 +1034,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Region = null;
             else
             {
-                Region region = new Region(new Rectangle(0, 0, this.Width, this.Height));
+                Region region = new(new Rectangle(0, 0, this.Width, this.Height));
                 foreach (Rectangle rect in m_clipRects)
                     region.Exclude(rect);
-                if (Region != null)
-                {
-                    Region.Dispose();
-                }
+                Region?.Dispose();
 
                 Region = region;
             }
@@ -1088,7 +1082,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             return false;
         }
 
-        private static readonly object ActiveAutoHideContentChangedEvent = new object();
+        private static readonly object ActiveAutoHideContentChangedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ActiveAutoHideContentChanged_Description")]
         public event EventHandler ActiveAutoHideContentChanged
@@ -1098,9 +1092,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnActiveAutoHideContentChanged(EventArgs e)
         {
-            EventHandler handler = (EventHandler)Events[ActiveAutoHideContentChangedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler)Events[ActiveAutoHideContentChangedEvent])?.Invoke(this, e);
         }
         private void m_autoHideWindow_ActiveContentChanged(object sender, EventArgs e)
         {
@@ -1108,7 +1100,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
 
 
-        private static readonly object ContentAddedEvent = new object();
+        private static readonly object ContentAddedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ContentAdded_Description")]
         public event EventHandler<DockContentEventArgs> ContentAdded
@@ -1118,12 +1110,10 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnContentAdded(DockContentEventArgs e)
         {
-            EventHandler<DockContentEventArgs> handler = (EventHandler<DockContentEventArgs>)Events[ContentAddedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler<DockContentEventArgs>)Events[ContentAddedEvent])?.Invoke(this, e);
         }
 
-        private static readonly object ContentRemovedEvent = new object();
+        private static readonly object ContentRemovedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ContentRemoved_Description")]
         public event EventHandler<DockContentEventArgs> ContentRemoved
@@ -1133,9 +1123,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnContentRemoved(DockContentEventArgs e)
         {
-            EventHandler<DockContentEventArgs> handler = (EventHandler<DockContentEventArgs>)Events[ContentRemovedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler<DockContentEventArgs>)Events[ContentRemovedEvent])?.Invoke(this, e);
         }
 
         internal void ResetDockWindows()

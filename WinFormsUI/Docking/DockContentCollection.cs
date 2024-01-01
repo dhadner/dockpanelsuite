@@ -6,7 +6,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     public class DockContentCollection : ReadOnlyCollection<IDockContent>
     {
-        private static List<IDockContent> _emptyList = new List<IDockContent>(0);
+        private static List<IDockContent> _emptyList = new(0);
 
         internal DockContentCollection()
             : base(new List<IDockContent>())

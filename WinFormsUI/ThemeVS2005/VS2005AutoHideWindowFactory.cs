@@ -46,11 +46,10 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2005
                 }
 
                 Rectangle rectDisplaying = DisplayingRectangle;
-                Rectangle rectHidden = new Rectangle(-rectDisplaying.Width, rectDisplaying.Y, rectDisplaying.Width, rectDisplaying.Height);
+                Rectangle rectHidden = new(-rectDisplaying.Width, rectDisplaying.Y, rectDisplaying.Width, rectDisplaying.Height);
                 foreach (Control c in Controls)
                 {
-                    DockPane pane = c as DockPane;
-                    if (pane == null)
+                    if (c is not DockPane pane)
                         continue;
 
 

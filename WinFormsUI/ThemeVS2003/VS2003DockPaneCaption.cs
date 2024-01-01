@@ -110,8 +110,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageCloseEnabled == null)
-                    _imageCloseEnabled = Resources.DockPaneCaption_CloseEnabled;
+                _imageCloseEnabled ??= Resources.DockPaneCaption_CloseEnabled;
                 return _imageCloseEnabled;
             }
         }
@@ -122,8 +121,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageCloseDisabled == null)
-                    _imageCloseDisabled = Resources.DockPaneCaption_CloseDisabled;
+                _imageCloseDisabled ??= Resources.DockPaneCaption_CloseDisabled;
                 return _imageCloseDisabled;
             }
         }
@@ -134,8 +132,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageAutoHideYes == null)
-                    _imageAutoHideYes = Resources.DockPaneCaption_AutoHideYes;
+                _imageAutoHideYes ??= Resources.DockPaneCaption_AutoHideYes;
                 return _imageAutoHideYes;
             }
         }
@@ -146,8 +143,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_imageAutoHideNo == null)
-                    _imageAutoHideNo = Resources.DockPaneCaption_AutoHideNo;
+                _imageAutoHideNo ??= Resources.DockPaneCaption_AutoHideNo;
                 return _imageAutoHideNo;
             }
         }
@@ -158,8 +154,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipClose == null)
-                    _toolTipClose = Strings.DockPaneCaption_ToolTipClose;
+                _toolTipClose ??= Strings.DockPaneCaption_ToolTipClose;
                 return _toolTipClose;
             }
         }
@@ -170,8 +165,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipAutoHide == null)
-                    _toolTipAutoHide = Strings.DockPaneCaption_ToolTipAutoHide;
+                _toolTipAutoHide ??= Strings.DockPaneCaption_ToolTipAutoHide;
                 return _toolTipAutoHide;
             }
         }
@@ -259,7 +253,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (!DockPane.IsActivated)
             {
-                using (Pen pen = new Pen(InactiveBorderColor))
+                using (Pen pen = new(InactiveBorderColor))
                 {
                     g.DrawLine(pen, rectCaption.X + 1, rectCaption.Y, rectCaption.X + rectCaption.Width - 2, rectCaption.Y);
                     g.DrawLine(pen, rectCaption.X + 1, rectCaption.Y + rectCaption.Height - 1, rectCaption.X + rectCaption.Width - 2, rectCaption.Y + rectCaption.Height - 1);
@@ -334,7 +328,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
             m_buttonClose.SuspendLayout();
             m_buttonAutoHide.SuspendLayout();
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
             m_buttonClose.Size = m_buttonAutoHide.Size = buttonSize;
             int x = rectCaption.X + rectCaption.Width - 1 - ButtonGapRight - m_buttonClose.Width;
             int y = rectCaption.Y + ButtonGapTop;

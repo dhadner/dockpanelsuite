@@ -700,18 +700,26 @@ namespace Tests
         [Test]
         public void ToolStripTest()
         {
-            var stripSystem = new ContextMenuStrip();
-            stripSystem.RenderMode = ToolStripRenderMode.System;
+            var stripSystem = new ContextMenuStrip
+            {
+                RenderMode = ToolStripRenderMode.System
+            };
 
-            var stripProfessional = new ContextMenuStrip();
-            stripProfessional.RenderMode = ToolStripRenderMode.Professional;
+            var stripProfessional = new ContextMenuStrip
+            {
+                RenderMode = ToolStripRenderMode.Professional
+            };
 
-            var stripManager = new ContextMenuStrip();
-            stripManager.RenderMode = ToolStripRenderMode.ManagerRenderMode;
+            var stripManager = new ContextMenuStrip
+            {
+                RenderMode = ToolStripRenderMode.ManagerRenderMode
+            };
 
             var renderder = new CustomRenderer();
-            var stripCustom = new ContextMenuStrip();
-            stripCustom.Renderer = renderder;
+            var stripCustom = new ContextMenuStrip
+            {
+                Renderer = renderder
+            };
 
             Assert.AreEqual(ToolStripRenderMode.System, stripSystem.RenderMode);
             Assert.AreEqual(ToolStripRenderMode.Professional, stripProfessional.RenderMode);

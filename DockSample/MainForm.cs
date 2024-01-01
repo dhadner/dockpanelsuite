@@ -11,7 +11,7 @@ namespace DockSample
     public partial class MainForm : Form
     {
         private bool m_bSaveLayout = true;
-        private DeserializeDockContent m_deserializeDockContent;
+        private readonly DeserializeDockContent m_deserializeDockContent;
         private DummySolutionExplorer m_solutionExplorer;
         private DummyPropertyWindow m_propertyWindow;
         private DummyToolbox m_toolbox;
@@ -61,7 +61,7 @@ namespace DockSample
 
         private DummyDoc CreateNewDocument()
         {
-            DummyDoc dummyDoc = new DummyDoc();
+            DummyDoc dummyDoc = new();
 
             int count = 1;
             string text = $"Document{count}";
@@ -77,8 +77,10 @@ namespace DockSample
 
         private DummyDoc CreateNewDocument(string text)
         {
-            DummyDoc dummyDoc = new DummyDoc();
-            dummyDoc.Text = text;
+            DummyDoc dummyDoc = new()
+            {
+                Text = text
+            };
             return dummyDoc;
         }
 
@@ -117,14 +119,14 @@ namespace DockSample
                 // DummyDoc overrides GetPersistString to add extra information into persistString.
                 // Any DockContent may override this value to add any needed information for deserialization.
 
-                string[] parsedStrings = persistString.Split(new char[] { ',' });
+                string[] parsedStrings = persistString.Split([',']);
                 if (parsedStrings.Length != 3)
                     return null;
 
                 if (parsedStrings[0] != typeof(DummyDoc).ToString())
                     return null;
 
-                DummyDoc dummyDoc = new DummyDoc();
+                DummyDoc dummyDoc = new();
                 if (parsedStrings[1] != string.Empty)
                     dummyDoc.FileName = parsedStrings[1];
                 if (parsedStrings[2] != string.Empty)
@@ -314,7 +316,7 @@ namespace DockSample
 
         private void menuItemAbout_Click(object sender, System.EventArgs e)
         {
-            AboutDialog aboutDialog = new AboutDialog();
+            AboutDialog aboutDialog = new();
             aboutDialog.ShowDialog(this);
         }
 
@@ -332,12 +334,13 @@ namespace DockSample
 
         private void menuItemOpen_Click(object sender, System.EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-
-            openFile.InitialDirectory = Application.ExecutablePath;
-            openFile.Filter = "rtf files (*.rtf)|*.rtf|txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
+            OpenFileDialog openFile = new()
+            {
+                InitialDirectory = Application.ExecutablePath,
+                Filter = "rtf files (*.rtf)|*.rtf|txt files (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
@@ -350,8 +353,10 @@ namespace DockSample
                     return;
                 }
 
-                DummyDoc dummyDoc = new DummyDoc();
-                dummyDoc.Text = fileName;
+                DummyDoc dummyDoc = new()
+                {
+                    Text = fileName
+                };
                 if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
                 {
                     dummyDoc.MdiParent = this;
@@ -392,8 +397,8 @@ namespace DockSample
         {
             if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
                 ActiveMdiChild.Close();
-            else if (dockPanel.ActiveDocument != null)
-                dockPanel.ActiveDocument.DockHandler.Close();
+            else
+                dockPanel.ActiveDocument?.DockHandler.Close();
         }
 
         private void menuItemCloseAll_Click(object sender, System.EventArgs e)
@@ -454,8 +459,8 @@ namespace DockSample
 
         private void menuItemNewWindow_Click(object sender, System.EventArgs e)
         {
-            MainForm newWindow = new MainForm();
-            newWindow.Text = newWindow.Text + " - New";
+            MainForm newWindow = new();
+            newWindow.Text += " - New";
             newWindow.Show();
         }
 
@@ -505,7 +510,7 @@ namespace DockSample
             _splashScreen.Visible = true;
             _splashScreen.TopMost = true;
 
-            Timer _timer = new Timer();
+            Timer _timer = new();
             _timer.Tick += (sender, e) =>
             {
                 _splashScreen.Visible = false;

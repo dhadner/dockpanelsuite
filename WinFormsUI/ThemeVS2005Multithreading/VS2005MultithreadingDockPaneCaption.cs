@@ -234,8 +234,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipClose == null)
-                    _toolTipClose = Strings.DockPaneCaption_ToolTipClose;
+                _toolTipClose ??= Strings.DockPaneCaption_ToolTipClose;
                 return _toolTipClose;
             }
         }
@@ -245,8 +244,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_toolTipOptions == null)
-                    _toolTipOptions = Strings.DockPaneCaption_ToolTipOptions;
+                _toolTipOptions ??= Strings.DockPaneCaption_ToolTipOptions;
 
                 return _toolTipOptions;
             }
@@ -257,8 +255,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipAutoHide == null)
-                    _toolTipAutoHide = Strings.DockPaneCaption_ToolTipAutoHide;
+                _toolTipAutoHide ??= Strings.DockPaneCaption_ToolTipAutoHide;
                 return _toolTipAutoHide;
             }
         }
@@ -402,10 +399,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 buttonWidth = buttonWidth * height / buttonHeight;
                 buttonHeight = height;
             }
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
             int x = rectCaption.X + rectCaption.Width - 1 - ButtonGapRight - ButtonClose.Width;
             int y = rectCaption.Y + ButtonGapTop;
-            Point point = new Point(x, y);
+            Point point = new(x, y);
             ButtonClose.Bounds = DrawHelper.RtlTransform(this, new Rectangle(point, buttonSize));
 
             // If the close button is not visible draw the auto hide button overtop.

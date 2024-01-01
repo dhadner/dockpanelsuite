@@ -381,8 +381,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
         {
             get
             {
-                if (m_toolTipSelect == null)
-                    m_toolTipSelect = Strings.DockPaneStrip_ToolTipWindowList;
+                m_toolTipSelect ??= Strings.DockPaneStrip_ToolTipWindowList;
                 return m_toolTipSelect;
             }
         }
@@ -597,7 +596,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             rectTab = RectangleToScreen(DrawHelper.RtlTransform(this, rectTab));
             Rectangle rectPaneClient = DockPane.RectangleToScreen(DockPane.ClientRectangle);
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             GraphicsPath pathTab = GetTabOutline_Document(Tabs[index], true, true, true);
             path.AddPath(pathTab, true);
 
@@ -627,7 +626,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             rectTab = RectangleToScreen(DrawHelper.RtlTransform(this, rectTab));
             Rectangle rectPaneClient = DockPane.RectangleToScreen(DockPane.ClientRectangle);
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             GraphicsPath pathTab = GetTabOutline(Tabs[index], true, true);
             path.AddPath(pathTab, true);
             path.AddLine(rectTab.Left, rectTab.Top, rectPaneClient.Left, rectTab.Top);
@@ -888,7 +887,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             if (count == 0)
                 return;
 
-            Rectangle rectTabStrip = new Rectangle(TabStripRectangle.Location, TabStripRectangle.Size);
+            Rectangle rectTabStrip = new(TabStripRectangle.Location, TabStripRectangle.Size);
             rectTabStrip.Height += 1;
 
             // Draw the tabs
@@ -980,10 +979,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             Rectangle rectTabStrip = TabStripRectangle;
             var tab = (TabVS2013)Tabs[index];
 
-            Rectangle rect = new Rectangle();
-            rect.X = tab.TabX;
-            rect.Width = tab.TabWidth;
-            rect.Height = rectTabStrip.Height - DocumentTabGapTop;
+            Rectangle rect = new()
+            {
+                X = tab.TabX,
+                Width = tab.TabWidth,
+                Height = rectTabStrip.Height - DocumentTabGapTop
+            };
 
             if (DockPane.DockPanel.DocumentTabStripLocation == DocumentTabStripLocation.Bottom)
                 rect.Y = rectTabStrip.Y + DocumentStripGapBottom;
@@ -1042,7 +1043,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
         private void DrawTab_ToolWindow(Graphics g, TabVS2013 tab)
         {
             var rect = tab.Rectangle.Value;
-            Rectangle rectIcon = new Rectangle(
+            Rectangle rectIcon = new(
                 rect.X + ToolWindowImageGapLeft,
                 rect.Y + rect.Height - ToolWindowImageGapBottom - ToolWindowImageHeight,
                 ToolWindowImageWidth, ToolWindowImageHeight);
@@ -1118,7 +1119,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                 return;
 
             var rectCloseButton = GetCloseButtonRect(rect);
-            Rectangle rectIcon = new Rectangle(
+            Rectangle rectIcon = new(
                 rect.X + DocumentIconGapLeft,
                 rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
                 DocumentIconWidth, DocumentIconHeight);
@@ -1357,8 +1358,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
 
         private void ContextMenuItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 IDockContent content = (IDockContent)item.Tag;
                 DockPane.ActiveContent = content;
@@ -1409,12 +1409,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                 buttonWidth = buttonWidth * height / buttonHeight;
                 buttonHeight = height;
             }
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
 
             int x = rectTabStrip.X + rectTabStrip.Width - DocumentTabGapLeft
                 - DocumentButtonGapRight - buttonWidth;
             int y = rectTabStrip.Y + DocumentButtonGapTop;
-            Point point = new Point(x, y);
+            Point point = new(x, y);
             ButtonOverflow.Bounds = DrawHelper.RtlTransform(this, new Rectangle(point, buttonSize));
 
             // If the close button is not visible draw the window list button overtop.

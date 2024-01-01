@@ -8,18 +8,15 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     public sealed class DockPanelExtender
     {
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public interface IDockPaneFactory
         {
             DockPane CreateDockPane(IDockContent content, DockState visibleState, bool show);
 
-            [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
             DockPane CreateDockPane(IDockContent content, FloatWindow floatWindow, bool show);
 
             DockPane CreateDockPane(IDockContent content, DockPane previousPane, DockAlignment alignment,
                                     double proportion, bool show);
 
-            [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
             DockPane CreateDockPane(IDockContent content, Rectangle floatWindowBounds, bool show);
         }
 
@@ -33,7 +30,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             SplitterBase CreateSplitterControl(ISplitterHost host);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public interface IFloatWindowFactory
         {
             FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane);
@@ -45,19 +41,16 @@ namespace WeifenLuo.WinFormsUI.Docking
             DockWindow CreateDockWindow(DockPanel dockPanel, DockState dockState);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public interface IDockPaneCaptionFactory
         {
             DockPaneCaptionBase CreateDockPaneCaption(DockPane pane);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public interface IDockPaneStripFactory
         {
             DockPaneStripBase CreateDockPaneStrip(DockPane pane);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public interface IAutoHideStripFactory
         {
             AutoHideStripBase CreateAutoHideStrip(DockPanel panel);
@@ -139,10 +132,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_dockPaneFactory == null)
-                {
-                    m_dockPaneFactory = new DefaultDockPaneFactory();
-                }
+                m_dockPaneFactory ??= new DefaultDockPaneFactory();
 
                 return m_dockPaneFactory;
             }
@@ -162,10 +152,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_floatWindowFactory == null)
-                {
-                    m_floatWindowFactory = new DefaultFloatWindowFactory();
-                }
+                m_floatWindowFactory ??= new DefaultFloatWindowFactory();
 
                 return m_floatWindowFactory;
             }

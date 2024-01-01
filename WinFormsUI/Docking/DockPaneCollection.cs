@@ -34,7 +34,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             if (PatchController.EnableNestedDisposalFix == true)
             {
-                List<DockPane> collection = new List<DockPane>(Items);
+                List<DockPane> collection = new(Items);
                 foreach (var dockPane in collection)
                 {
                     dockPane.Close();

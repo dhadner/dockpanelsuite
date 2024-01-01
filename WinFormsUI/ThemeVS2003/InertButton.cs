@@ -80,8 +80,10 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
             // Should not be allowed to select this control
             SetStyle(ControlStyles.Selectable, false);
 
-            m_timer = new Timer();
-            m_timer.Enabled = false;
+            m_timer = new Timer
+            {
+                Enabled = false
+            };
             m_timer.Tick += new EventHandler(Timer_Tick);
         }
 
@@ -89,8 +91,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
         {
             if (disposing)
             {
-                if (components != null)
-                    components.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -302,8 +303,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
             {
                 if (m_toolTipText != value)
                 {
-                    if (m_toolTip == null)
-                        m_toolTip = new ToolTip(this.components);
+                    m_toolTip ??= new ToolTip(this.components);
                     m_toolTipText = value;
                     m_toolTip.SetToolTip(this, value);
                 }
@@ -433,7 +433,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
 
         private void DrawBackground(Graphics g)
         {
-            using (SolidBrush brush = new SolidBrush(BackColor))
+            using (SolidBrush brush = new(BackColor))
             {
                 g.FillRectangle(brush, ClientRectangle);
             }
@@ -455,26 +455,30 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
                 // white -> BackColor
                 // black -> ForeColor
                 ColorMap[] colorMap = new ColorMap[2];
-                colorMap[0] = new ColorMap();
-                colorMap[0].OldColor = Color.White;
-                colorMap[0].NewColor = this.BackColor;
-                colorMap[1] = new ColorMap();
-                colorMap[1].OldColor = Color.Black;
-                colorMap[1].NewColor = this.ForeColor;
+                colorMap[0] = new ColorMap
+                {
+                    OldColor = Color.White,
+                    NewColor = this.BackColor
+                };
+                colorMap[1] = new ColorMap
+                {
+                    OldColor = Color.Black,
+                    NewColor = this.ForeColor
+                };
                 imageAttr.SetRemapTable(colorMap);
             }
 
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            Rectangle rect = new(0, 0, image.Width, image.Height);
 
             if ((!Enabled) && (null == ImageDisabled))
             {
-                using (Bitmap bitmapMono = new Bitmap(image, ClientRectangle.Size))
+                using (Bitmap bitmapMono = new(image, ClientRectangle.Size))
                 {
                     if (imageAttr != null)
                     {
                         using (Graphics gMono = Graphics.FromImage(bitmapMono))
                         {
-                            gMono.DrawImage(image, new Point[3] { new Point(0, 0), new Point(image.Width - 1, 0), new Point(0, image.Height - 1) }, rect, GraphicsUnit.Pixel, imageAttr);
+                            gMono.DrawImage(image, new Point[3] { new(0, 0), new(image.Width - 1, 0), new(0, image.Height - 1) }, rect, GraphicsUnit.Pixel, imageAttr);
                         }
                     }
                     ControlPaint.DrawImageDisabled(g, bitmapMono, 0, 0, this.BackColor);
@@ -511,7 +515,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
             rect.Width -= 2 * BorderWidth;
             rect.Height -= 2 * BorderWidth;
 
-            StringFormat stringFormat = new StringFormat();
+            StringFormat stringFormat = new();
 
             if (TextAlign == ContentAlignment.TopLeft)
             {

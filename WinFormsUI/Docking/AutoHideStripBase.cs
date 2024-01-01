@@ -10,7 +10,6 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     public abstract class AutoHideStripBase : Control
     {
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         protected class Tab : IDisposable
         {
             private IDockContent m_content;
@@ -41,7 +40,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         protected sealed class TabCollection : IEnumerable<Tab>
         {
             #region IEnumerable Members
@@ -116,7 +114,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         protected class Pane : IDisposable
         {
             private DockPane m_dockPane;
@@ -157,7 +154,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         protected sealed class PaneCollection : IEnumerable<Pane>
         {
             private class AutoHideState
@@ -272,8 +268,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                         if (count == index)
                         {
-                            if (pane.AutoHidePane == null)
-                                pane.AutoHidePane = DockPanel.AutoHideStripControl.CreatePane(pane);
+                            pane.AutoHidePane ??= DockPanel.AutoHideStripControl.CreatePane(pane);
                             return pane.AutoHidePane as Pane;
                         }
 
@@ -454,8 +449,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (m_displayingArea == null)
-                    m_displayingArea = new GraphicsPath();
+                m_displayingArea ??= new GraphicsPath();
 
                 return m_displayingArea;
             }
@@ -611,7 +605,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject HitTest(int x, int y)
             {
-                Dictionary<DockState, Rectangle> rectangles = new Dictionary<DockState, Rectangle> {
+                Dictionary<DockState, Rectangle> rectangles = new()
+                {
                     { DockState.DockTopAutoHide,    _strip.GetTabStripRectangle(DockState.DockTopAutoHide) },
                     { DockState.DockBottomAutoHide, _strip.GetTabStripRectangle(DockState.DockBottomAutoHide) },
                     { DockState.DockLeftAutoHide,   _strip.GetTabStripRectangle(DockState.DockLeftAutoHide) },
@@ -671,7 +666,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject GetChild(int index)
             {
-                List<Tab> tabs = new List<Tab>();
+                List<Tab> tabs = new();
                 foreach (Pane pane in _strip.GetPanes(_state))
                 {
                     tabs.AddRange(pane.AutoHideTabs);

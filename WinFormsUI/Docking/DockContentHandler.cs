@@ -38,10 +38,8 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (disposing)
             {
                 DockPanel = null;
-                if (m_autoHideTab != null)
-                    m_autoHideTab.Dispose();
-                if (m_tab != null)
-                    m_tab.Dispose();
+                m_autoHideTab?.Dispose();
+                m_tab?.Dispose();
 
                 Form.Disposed -= new EventHandler(Form_Disposed);
                 Form.TextChanged -= new EventHandler(Form_TextChanged);
@@ -249,8 +247,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 Pane = null;
 
-                if (m_dockPanel != null)
-                    m_dockPanel.RemoveContent(Content);
+                m_dockPanel?.RemoveContent(Content);
 
                 if (m_tab != null)
                 {
@@ -348,8 +345,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
 
                 m_tabText = value;
-                if (Pane != null)
-                    Pane.RefreshChanges();
+                Pane?.RefreshChanges();
             }
         }
 
@@ -399,7 +395,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
         public DockState CheckDockState(bool isFloat)
         {
             DockState dockState;
@@ -533,8 +528,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 throw new InvalidOperationException(Strings.DockContentHandler_SetDockState_InvalidState);
 
             DockPanel dockPanel = DockPanel;
-            if (dockPanel != null)
-                dockPanel.SuspendLayout(true);
+            dockPanel?.SuspendLayout(true);
 
             SuspendSetDockState();
 
@@ -637,8 +631,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             ResumeSetDockState();
 
-            if (dockPanel != null)
-                dockPanel.ResumeLayout(true, true);
+            dockPanel?.ResumeLayout(true, true);
         }
 
         private void ResetAutoHidePortion(DockState oldState, DockState newState)
@@ -955,7 +948,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             Activate();                         //and size of the form are finally processed before the form is shown
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
         public void Show(DockPanel dockPanel, Rectangle floatWindowBounds)
         {
             if (dockPanel == null)
@@ -1017,18 +1009,15 @@ namespace WeifenLuo.WinFormsUI.Docking
         public void Close()
         {
             DockPanel dockPanel = DockPanel;
-            if (dockPanel != null)
-                dockPanel.SuspendLayout(true);
+            dockPanel?.SuspendLayout(true);
             Form.Close();
-            if (dockPanel != null)
-                dockPanel.ResumeLayout(true, true);
+            dockPanel?.ResumeLayout(true, true);
         }
 
         private DockPaneStripBase.Tab m_tab = null;
         internal DockPaneStripBase.Tab GetTab(DockPaneStripBase dockPaneStrip)
         {
-            if (m_tab == null)
-                m_tab = dockPaneStrip.CreateTab(Content);
+            m_tab ??= dockPaneStrip.CreateTab(Content);
 
             return m_tab;
         }
@@ -1041,7 +1030,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
 
         #region Events
-        private static readonly object DockStateChangedEvent = new object();
+        private static readonly object DockStateChangedEvent = new();
         public event EventHandler DockStateChanged
         {
             add { Events.AddHandler(DockStateChangedEvent, value); }
@@ -1066,8 +1055,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 DockPanel.RefreshAutoHideStrip();
             else if (Pane != null)
             {
-                if (Pane.FloatWindow != null)
-                    Pane.FloatWindow.SetText();
+                Pane.FloatWindow?.SetText();
                 Pane.RefreshChanges();
             }
         }
@@ -1189,8 +1177,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 int convertedIndex = 0;
                 while (visiblePanes <= contentIndex && convertedIndex < Pane.Contents.Count)
                 {
-                    DockContent window = Pane.Contents[convertedIndex] as DockContent;
-                    if (window != null && !window.IsHidden)
+                    if (Pane.Contents[convertedIndex] is DockContent window && !window.IsHidden)
                         ++visiblePanes;
 
                     ++convertedIndex;

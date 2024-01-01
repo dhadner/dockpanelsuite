@@ -24,7 +24,7 @@ namespace DockSample
                 {
                     Stream s = new FileStream(value, FileMode.Open);
 
-                    FileInfo efInfo = new FileInfo(value);
+                    FileInfo efInfo = new(value);
 
                     string fext = efInfo.Extension.ToUpper();
 

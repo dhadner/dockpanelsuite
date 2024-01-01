@@ -14,8 +14,8 @@ namespace WeifenLuo.WinFormsUI.Docking
     [TypeConverter(typeof(DockPanelSkinConverter))]
     public class DockPanelSkin
     {
-        private AutoHideStripSkin m_autoHideStripSkin = new AutoHideStripSkin();
-        private DockPaneStripSkin m_dockPaneStripSkin = new DockPaneStripSkin();
+        private AutoHideStripSkin m_autoHideStripSkin = new();
+        private DockPaneStripSkin m_dockPaneStripSkin = new();
 
         /// <summary>
         /// The skin used to display the auto hide strips and tabs.
@@ -42,9 +42,9 @@ namespace WeifenLuo.WinFormsUI.Docking
     [TypeConverter(typeof(AutoHideStripConverter))]
     public class AutoHideStripSkin
     {
-        private DockPanelGradient m_dockStripGradient = new DockPanelGradient();
-        private TabGradient m_TabGradient = new TabGradient();
-        private DockStripBackground m_DockStripBackground = new DockStripBackground();
+        private DockPanelGradient m_dockStripGradient = new();
+        private TabGradient m_TabGradient = new();
+        private DockStripBackground m_DockStripBackground = new();
         
         private Font m_textFont = SystemFonts.MenuFont;
 
@@ -92,8 +92,8 @@ namespace WeifenLuo.WinFormsUI.Docking
     [TypeConverter(typeof(DockPaneStripConverter))]
     public class DockPaneStripSkin
     {
-        private DockPaneStripGradient m_DocumentGradient = new DockPaneStripGradient();
-        private DockPaneStripToolWindowGradient m_ToolWindowGradient = new DockPaneStripToolWindowGradient();
+        private DockPaneStripGradient m_DocumentGradient = new();
+        private DockPaneStripToolWindowGradient m_ToolWindowGradient = new();
         private Font m_textFont = SystemFonts.MenuFont;
 
         /// <summary>
@@ -131,8 +131,8 @@ namespace WeifenLuo.WinFormsUI.Docking
     [TypeConverter(typeof(DockPaneStripGradientConverter))]
     public class DockPaneStripToolWindowGradient : DockPaneStripGradient
     {
-        private TabGradient m_activeCaptionGradient = new TabGradient();
-        private TabGradient m_inactiveCaptionGradient = new TabGradient();
+        private TabGradient m_activeCaptionGradient = new();
+        private TabGradient m_inactiveCaptionGradient = new();
 
         /// <summary>
         /// The skin used to display the active ToolWindow caption.
@@ -159,10 +159,10 @@ namespace WeifenLuo.WinFormsUI.Docking
     [TypeConverter(typeof(DockPaneStripGradientConverter))]
     public class DockPaneStripGradient
     {
-        private DockPanelGradient m_dockStripGradient = new DockPanelGradient();
-        private TabGradient m_activeTabGradient = new TabGradient();
-        private TabGradient m_inactiveTabGradient = new TabGradient();
-        private TabGradient m_hoverTabGradient = new TabGradient();
+        private DockPanelGradient m_dockStripGradient = new();
+        private TabGradient m_activeTabGradient = new();
+        private TabGradient m_inactiveTabGradient = new();
+        private TabGradient m_hoverTabGradient = new();
         
 
         /// <summary>
@@ -406,8 +406,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
         {
-            TabGradient val = value as TabGradient;
-            if (destinationType == typeof(String) && val != null)
+            if (destinationType == typeof(String) && value is TabGradient val)
             {
                 return "DockPaneTabGradient";
             }

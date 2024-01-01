@@ -76,12 +76,10 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (!Win32Helper.IsRunningOnMono)
                 for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent)
                 {
-                    IDockContent content = control as IDockContent;
-                    if (content != null && content.DockHandler.DockPanel == dockPanel)
+                    if (control is IDockContent content && content.DockHandler.DockPanel == dockPanel)
                         return content.DockHandler.Pane;
 
-                    DockPane pane = control as DockPane;
-                    if (pane != null && pane.DockPanel == dockPanel)
+                    if (control is DockPane pane && pane.DockPanel == dockPanel)
                         return pane;
                 }
 
@@ -93,8 +91,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (!Win32Helper.IsRunningOnMono)
                 for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent)
                 {
-                    FloatWindow floatWindow = control as FloatWindow;
-                    if (floatWindow != null && floatWindow.DockPanel == dockPanel)
+                    if (control is FloatWindow floatWindow && floatWindow.DockPanel == dockPanel)
                         return floatWindow;
                 }
 

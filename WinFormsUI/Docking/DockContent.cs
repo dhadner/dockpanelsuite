@@ -158,7 +158,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             set { DockHandler.FloatPane = value; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         protected virtual string GetPersistString()
         {
             return GetType().ToString();
@@ -269,7 +268,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             DockHandler.Show(dockPanel, dockState);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
         public void Show(DockPanel dockPanel, Rectangle floatWindowBounds)
         {
             DockHandler.Show(dockPanel, floatWindowBounds);
@@ -285,7 +283,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             DockHandler.Show(previousPane, alignment, proportion);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
         public void FloatAt(Rectangle floatWindowBounds)
         {
             DockHandler.FloatAt(floatWindowBounds);
@@ -319,7 +316,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             OnDockStateChanged(e);
         }
 
-        private static readonly object DockStateChangedEvent = new object();
+        private static readonly object DockStateChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("Pane_DockStateChanged_Description")]
         public event EventHandler DockStateChanged

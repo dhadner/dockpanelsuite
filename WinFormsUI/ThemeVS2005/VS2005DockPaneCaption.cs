@@ -80,8 +80,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_imageButtonClose == null)
-                    _imageButtonClose = Resources.DockPane_Close;
+                _imageButtonClose ??= Resources.DockPane_Close;
 
                 return _imageButtonClose;
             }
@@ -109,8 +108,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_imageButtonAutoHide == null)
-                    _imageButtonAutoHide = Resources.DockPane_AutoHide;
+                _imageButtonAutoHide ??= Resources.DockPane_AutoHide;
 
                 return _imageButtonAutoHide;
             }
@@ -121,8 +119,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_imageButtonDock == null)
-                    _imageButtonDock = Resources.DockPane_Dock;
+                _imageButtonDock ??= Resources.DockPane_Dock;
 
                 return _imageButtonDock;
             }
@@ -150,8 +147,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_imageButtonOptions == null)
-                    _imageButtonOptions = Resources.DockPane_Option;
+                _imageButtonOptions ??= Resources.DockPane_Option;
 
                 return _imageButtonOptions;
             }
@@ -253,8 +249,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipClose == null)
-                    _toolTipClose = Strings.DockPaneCaption_ToolTipClose;
+                _toolTipClose ??= Strings.DockPaneCaption_ToolTipClose;
                 return _toolTipClose;
             }
         }
@@ -264,8 +259,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                if (_toolTipOptions == null)
-                    _toolTipOptions = Strings.DockPaneCaption_ToolTipOptions;
+                _toolTipOptions ??= Strings.DockPaneCaption_ToolTipOptions;
 
                 return _toolTipOptions;
             }
@@ -276,8 +270,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {	
-                if (_toolTipAutoHide == null)
-                    _toolTipAutoHide = Strings.DockPaneCaption_ToolTipAutoHide;
+                _toolTipAutoHide ??= Strings.DockPaneCaption_ToolTipAutoHide;
                 return _toolTipAutoHide;
             }
         }
@@ -289,10 +282,11 @@ namespace WeifenLuo.WinFormsUI.Docking
             {
                 if (_activeBackColorGradientBlend == null)
                 {
-                    Blend blend = new Blend(2);
-
-                    blend.Factors = new float[]{0.5F, 1.0F};
-                    blend.Positions = new float[]{0.0F, 1.0F};
+                    Blend blend = new(2)
+                    {
+                        Factors = new float[] { 0.5F, 1.0F },
+                        Positions = new float[] { 0.0F, 1.0F }
+                    };
                     _activeBackColorGradientBlend = blend;
                 }
 
@@ -439,10 +433,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 buttonWidth = buttonWidth * height / buttonHeight;
                 buttonHeight = height;
             }
-            Size buttonSize = new Size(buttonWidth, buttonHeight);
+            Size buttonSize = new(buttonWidth, buttonHeight);
             int x = rectCaption.X + rectCaption.Width - 1 - ButtonGapRight - m_buttonClose.Width;
             int y = rectCaption.Y + ButtonGapTop;
-            Point point = new Point(x, y);
+            Point point = new(x, y);
             ButtonClose.Bounds = DrawHelper.RtlTransform(this, new Rectangle(point, buttonSize));
 
             // If the close button is not visible draw the auto hide button overtop.

@@ -20,8 +20,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     string key = base.Description;
                     DescriptionValue = ResourceHelper.GetString(key);
-                    if (DescriptionValue == null)
-                        DescriptionValue = String.Empty;
+                    DescriptionValue ??= String.Empty;
 
                     m_initialized = true;
                 }

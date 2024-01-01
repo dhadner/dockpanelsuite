@@ -167,8 +167,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     IDesignerHost host = (value.GetService(typeof(IDesignerHost)) as IDesignerHost);
                     if (host != null)
                     {
-                        Form parent = host.RootComponent as Form;
-                        if (parent != null)
+                        if (host.RootComponent is Form parent)
                             ParentForm = parent;
                     }
                 }
@@ -351,8 +350,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (GetMdiClientController().ParentForm == null)
                 return;
 
-            IDockContent content = GetMdiClientController().ParentForm.ActiveMdiChild as IDockContent;
-            if (content == null)
+            if (GetMdiClientController().ParentForm.ActiveMdiChild is not IDockContent content)
                 return;
 
             if (content.DockHandler.DockPanel == this && content.DockHandler.Pane != null)
@@ -380,20 +378,17 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private void SuspendMdiClientLayout()
         {
-            if (GetMdiClientController().MdiClient != null)
-                GetMdiClientController().MdiClient.SuspendLayout();
+            GetMdiClientController().MdiClient?.SuspendLayout();
         }
 
         private void ResumeMdiClientLayout(bool perform)
         {
-            if (GetMdiClientController().MdiClient != null)
-                GetMdiClientController().MdiClient.ResumeLayout(perform);
+            GetMdiClientController().MdiClient?.ResumeLayout(perform);
         }
 
         private void PerformMdiClientLayout()
         {
-            if (GetMdiClientController().MdiClient != null)
-                GetMdiClientController().MdiClient.PerformLayout();
+            GetMdiClientController().MdiClient?.PerformLayout();
         }
 
         // Called when:

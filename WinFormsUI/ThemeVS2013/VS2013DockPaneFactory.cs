@@ -11,7 +11,6 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             return new VS2013DockPane(content, visibleState, show);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
         public DockPane CreateDockPane(IDockContent content, FloatWindow floatWindow, bool show)
         {
             return new VS2013DockPane(content, floatWindow, show);
@@ -22,7 +21,6 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
             return new VS2013DockPane(content, previousPane, alignment, proportion, show);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
         public DockPane CreateDockPane(IDockContent content, Rectangle floatWindowBounds, bool show)
         {
             return new VS2013DockPane(content, floatWindowBounds, show);
