@@ -1,7 +1,7 @@
 DockPanel Suite
 ===============
 
-[![Build status](https://img.shields.io/github/workflow/status/dhadner/dockpanelsuite/CI?style=flat-square)](https://github.com/dhadner/dockpanelsuite/actions?query=workflow%3ACI)
+[[!(https://github.com/dhadner/dockpanelsuite/actions/workflows/dotnet-desktop.yml/badge.svg)]
 
 > **This project is looking for new maintainers. Please read [this](https://github.com/dockpanelsuite/dockpanelsuite/issues/663) for more information.**
 
