@@ -1,8 +1,7 @@
 DockPanel Suite
 ===============
 
-(https://gitter.im/dhadner/dockpanelsuite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build status](https://img.shields.io/github/workflow/status/dhadner/dockpanelsuite/CI?style=flat-square)](https://github.com/dhadner/dockpanelsuite/actions?query=workflow%3ACI)
+![Build status](https://github.com/dhadner/dockpanelsuite/actions/workflows/dotnet-desktop.yml/badge.svg?event=push))
 
 > **This project is looking for new maintainers. Please read [this](https://github.com/dockpanelsuite/dockpanelsuite/issues/663) for more information.**
 
@@ -10,10 +9,10 @@ DockPanel Suite - The Visual Studio inspired docking library for .NET WinForms
 
 For more details, check out [http://dockpanelsuite.com](http://dockpanelsuite.com).
 
-Visual Studio 2019 Community edition and above is recommended to compile the code base.
+**Current status of this fork:**
+
+Updated to compile with Visual Studio Community Edition 17.8 and is built on .NET 8.0.
 
 > **If you look for alternative options, use a search engine to learn more about better components like Krypton Docking.**
 
-**Current status of this fork:**
 
-Updated to compile with Visual Studio 17.8 and is built on .NET 8.0.
