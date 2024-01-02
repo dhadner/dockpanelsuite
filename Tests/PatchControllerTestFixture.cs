@@ -15,19 +15,19 @@ namespace Tests
         public void Basic()
         {
             PatchController.Reset();
-            Assert.IsTrue(PatchController.EnableHighDpi);
-            Assert.IsTrue(PatchController.EnableContentOrderFix);
-            Assert.IsTrue(PatchController.EnableFontInheritanceFix);
-            Assert.IsTrue(PatchController.EnableMainWindowFocusLostFix);
-            Assert.IsTrue(PatchController.EnableMemoryLeakFix);
-            Assert.IsTrue(PatchController.EnableNestedDisposalFix);
-            Assert.IsFalse(PatchController.EnableActiveXFix);
-            Assert.IsTrue(PatchController.EnableDisplayingPaneFix);
-            Assert.IsTrue(PatchController.EnableActiveControlFix);
-            Assert.IsTrue(PatchController.EnableFloatSplitterFix);
-            Assert.IsTrue(PatchController.EnableActivateOnDockFix);
-            Assert.IsTrue(PatchController.EnableSelectClosestOnClose);
-            Assert.IsFalse(PatchController.EnablePerScreenDpi);
+            Assert.IsFalse(PatchController.EnableHighDpi);
+            Assert.IsFalse(PatchController.EnableContentOrderFix);
+            Assert.IsFalse(PatchController.EnableFontInheritanceFix);
+            Assert.IsFalse(PatchController.EnableMainWindowFocusLostFix);
+            Assert.IsFalse(PatchController.EnableMemoryLeakFix);
+            Assert.IsFalse(PatchController.EnableNestedDisposalFix);
+            Assert.IsTrue(PatchController.EnableActiveXFix);
+            Assert.IsFalse(PatchController.EnableDisplayingPaneFix);
+            Assert.IsFalse(PatchController.EnableActiveControlFix);
+            Assert.IsFalse(PatchController.EnableFloatSplitterFix);
+            Assert.IsFalse(PatchController.EnableActivateOnDockFix);
+            Assert.IsFalse(PatchController.EnableSelectClosestOnClose);
+            Assert.IsTrue(PatchController.EnablePerScreenDpi);
         }
 
         [Test]
@@ -87,19 +87,19 @@ namespace Tests
             Environment.SetEnvironmentVariable("DPS_EnablePerScreenDpi", null);
 
             PatchController.Reset();
-            Assert.IsTrue(PatchController.EnableHighDpi);
-            Assert.IsTrue(PatchController.EnableContentOrderFix);
-            Assert.IsTrue(PatchController.EnableFontInheritanceFix);
-            Assert.IsTrue(PatchController.EnableMainWindowFocusLostFix);
-            Assert.IsTrue(PatchController.EnableMemoryLeakFix);
-            Assert.IsTrue(PatchController.EnableNestedDisposalFix);
-            Assert.IsFalse(PatchController.EnableActiveXFix);
-            Assert.IsTrue(PatchController.EnableDisplayingPaneFix);
-            Assert.IsTrue(PatchController.EnableActiveControlFix);
-            Assert.IsTrue(PatchController.EnableFloatSplitterFix);
-            Assert.IsTrue(PatchController.EnableActivateOnDockFix);
-            Assert.IsTrue(PatchController.EnableSelectClosestOnClose);
-            Assert.IsFalse(PatchController.EnablePerScreenDpi);
+            Assert.IsFalse(PatchController.EnableHighDpi);
+            Assert.IsFalse(PatchController.EnableContentOrderFix);
+            Assert.IsFalse(PatchController.EnableFontInheritanceFix);
+            Assert.IsFalse(PatchController.EnableMainWindowFocusLostFix);
+            Assert.IsFalse(PatchController.EnableMemoryLeakFix);
+            Assert.IsFalse(PatchController.EnableNestedDisposalFix);
+            Assert.IsTrue(PatchController.EnableActiveXFix);
+            Assert.IsFalse(PatchController.EnableDisplayingPaneFix);
+            Assert.IsFalse(PatchController.EnableActiveControlFix);
+            Assert.IsFalse(PatchController.EnableFloatSplitterFix);
+            Assert.IsFalse(PatchController.EnableActivateOnDockFix);
+            Assert.IsFalse(PatchController.EnableSelectClosestOnClose);
+            Assert.IsTrue(PatchController.EnablePerScreenDpi);
         }
 
         [Test]
