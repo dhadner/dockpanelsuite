@@ -1,7 +1,6 @@
 DockPanel Suite
 ===============
 
-(https://gitter.im/dhadner/dockpanelsuite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build status](https://img.shields.io/github/workflow/status/dhadner/dockpanelsuite/CI?style=flat-square)](https://github.com/dhadner/dockpanelsuite/actions?query=workflow%3ACI)
 
 > **This project is looking for new maintainers. Please read [this](https://github.com/dockpanelsuite/dockpanelsuite/issues/663) for more information.**
