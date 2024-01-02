@@ -1,7 +1,7 @@
 DockPanel Suite
 ===============
 
-![Build status](https://github.com/dhadner/dockpanelsuite/actions/workflows/dotnet-desktop.yml/badge.svg)
+![Build status](https://github.com/dhadner/dockpanelsuite/actions/workflows/dotnet-desktop.yml/badge.svg?event=push))
 
 > **This project is looking for new maintainers. Please read [this](https://github.com/dockpanelsuite/dockpanelsuite/issues/663) for more information.**
 
