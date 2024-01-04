@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
+    /// <summary>
+    /// Default theme for DockPanel.
+    /// </summary>
     internal class DefaultTheme : ThemeBase
     {
         internal DefaultTheme()
