@@ -15,7 +15,6 @@ namespace Tests
         public void Basic()
         {
             PatchController.Reset();
-            return;
             // The results seem to depend on whether it is a
             // debug or release build, so more work is needed.
             Assert.IsFalse(PatchController.EnableHighDpi);
@@ -90,7 +89,6 @@ namespace Tests
             Environment.SetEnvironmentVariable("DPS_EnablePerScreenDpi", null);
 
             PatchController.Reset();
-            return;
 
             // Results seem to depend on whether it is s debug or release
             // build, so more work is needed.
