@@ -89,9 +89,6 @@ namespace Tests
             Environment.SetEnvironmentVariable("DPS_EnablePerScreenDpi", null);
 
             PatchController.Reset();
-
-            // Results seem to depend on whether it is s debug or release
-            // build, so more work is needed.
             Assert.IsFalse(PatchController.EnableHighDpi);
             Assert.IsFalse(PatchController.EnableContentOrderFix);
             Assert.IsFalse(PatchController.EnableFontInheritanceFix);
