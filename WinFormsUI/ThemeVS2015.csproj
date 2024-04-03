@@ -24,6 +24,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ThemeVS2012\ImageService.cs" />
     <Compile Include="ThemeVS2012\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
