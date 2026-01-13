@@ -29,3 +29,6 @@ T4MVC.cs
 /.vs
 /.idea
 *.bak
+/WinFormsUI/ThemeVS2015/Resources/vs2015blue.vstheme/vs2015blue.vstheme
+/WinFormsUI/ThemeVS2015/Resources/vs2015dark.vstheme/vs2015dark.vstheme
+/WinFormsUI/ThemeVS2015/Resources/vs2015light.vstheme/vs2015light.vstheme
